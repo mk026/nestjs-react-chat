@@ -1,9 +1,6 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { OmitType } from '@nestjs/mapped-types';
+import { SignupCredentialsDto } from './signup-credentials.dto';
 
-export class SigninCredentialsDto {
-  @IsEmail()
-  readonly email: string;
-
-  @IsNotEmpty()
-  readonly password: string;
-}
+export class SigninCredentialsDto extends OmitType(SignupCredentialsDto, [
+  'name',
+] as const) {}
