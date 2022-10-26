@@ -1,7 +1,7 @@
-import { Typography } from "@mui/material";
+import AppRouter from "./components/routing/app-router/AppRouter";
 
 function App() {
-  return <Typography variant="h1">React Chat</Typography>;
+  return <AppRouter />;
 }
 
 export default App;
