@@ -19,12 +19,12 @@ export interface IRoute {
   Component: ComponentType;
 }
 
-export const publicPaths: IRoute[] = [
+export const publicRoutes: IRoute[] = [
   { path: Paths.SIGNUP, Component: SignupPage },
   { path: Paths.SIGNIN, Component: SigninPage },
 ];
 
-export const authPaths: IRoute[] = [
+export const authRoutes: IRoute[] = [
   { path: Paths.PROFILE, Component: ProfilePage },
   { path: Paths.ROOMS, Component: RoomsPage },
   { path: Paths.ROOM, Component: RoomPage },
