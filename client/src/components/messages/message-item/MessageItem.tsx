@@ -1,7 +1,18 @@
 import { FC } from "react";
+import { Card, Typography } from "@mui/material";
 
-const MessageItem: FC = () => {
-  return <div>MessageItem</div>;
+import { IMessage } from "../../../models/IMessage";
+
+interface MessageItemProps {
+  message: IMessage;
+}
+
+const MessageItem: FC<MessageItemProps> = ({ message }) => {
+  return (
+    <Card>
+      <Typography variant="body1">{message.content}</Typography>
+    </Card>
+  );
 };
 
 export default MessageItem;
