@@ -12,7 +12,7 @@ const RoomsList: FC<RoomsListProps> = ({ rooms }) => {
   return (
     <Stack>
       {rooms.map((room) => (
-        <RoomItem room={room} />
+        <RoomItem key={room.id} room={room} />
       ))}
     </Stack>
   );

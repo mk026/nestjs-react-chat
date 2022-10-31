@@ -12,7 +12,7 @@ const MessagesList: FC<MessagesListProps> = ({ messages }) => {
   return (
     <Stack>
       {messages.map((message) => (
-        <MessageItem message={message} />
+        <MessageItem key={message.id} message={message} />
       ))}
     </Stack>
   );
