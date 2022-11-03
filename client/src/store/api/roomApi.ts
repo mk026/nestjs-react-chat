@@ -1,13 +1,13 @@
 import { baseApi } from "./baseApi";
 
-export const ROOMS_URL = "/signup";
+export const ROOMS_URL = "/rooms";
 
-export const authApi = baseApi.injectEndpoints({
+export const roomApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    fetchRooms: builder.query({
+    getRooms: builder.query({
       query: () => ({ url: ROOMS_URL }),
     }),
   }),
 });
 
-export const { useFetchRoomsQuery } = authApi;
+export const { useGetRoomsQuery } = roomApi;
