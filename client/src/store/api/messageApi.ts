@@ -45,7 +45,16 @@ export const messageApi = baseApi.injectEndpoints({
         socket.disconnect();
       },
     }),
+    addMessage: builder.mutation<null, IMessage>({
+      queryFn: (data) => {
+        if (socket.disconnected) {
+          socket.connect();
+        }
+        socket.emit("message", data);
+        return { data: null };
+      },
+    }),
   }),
 });
 
-export const { useGetMessagesQuery } = messageApi;
+export const { useGetMessagesQuery, useAddMessageMutation } = messageApi;
