@@ -5,7 +5,7 @@ import {
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
 
-@WebSocketGateway()
+@WebSocketGateway({ cors: { origin: '*' } })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   handleConnection(client: Socket) {
     console.log(`Client ${client.id} connected`);
