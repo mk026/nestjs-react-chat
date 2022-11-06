@@ -7,8 +7,10 @@ import {
   SignupFormValues,
   signupValidationSchema,
 } from "../../../validation/signupValidation";
+import { useSignupMutation } from "../../../store/api/authApi";
 
 const SignupForm: FC = () => {
+  const [signup] = useSignupMutation();
   const {
     register,
     handleSubmit,
@@ -19,7 +21,7 @@ const SignupForm: FC = () => {
   });
 
   const signupHandler = (values: SignupFormValues) => {
-    console.log(values);
+    signup(values);
   };
 
   return (
