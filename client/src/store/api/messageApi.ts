@@ -1,31 +1,12 @@
-import { baseApi } from "./baseApi";
+import { baseApi, socket } from "./baseApi";
 import { IMessage } from "../../models/IMessage";
-import { io, Socket } from "socket.io-client";
 
 export const MESSAGES_URL = "/messages";
-export const SOCKET_URL = "ws://localhost:8080";
 
 export interface AddMessageDto {
   content: string;
   roomId: number;
 }
-
-export interface ServertoClientEvents {
-  message: (data: IMessage) => void;
-}
-
-export interface ClientToServerEvents {
-  message: (data: AddMessageDto) => void;
-}
-
-export const socket: Socket<ServertoClientEvents, ClientToServerEvents> = io(
-  SOCKET_URL,
-  { autoConnect: false }
-);
-
-socket.on("connect", () => {
-  console.log("socket connected");
-});
 
 export const messageApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
