@@ -12,7 +12,7 @@ const RoomPage: FC = () => {
   return (
     <div>
       <MessagesList messages={data || []} />
-      <AddMessageForm />
+      <AddMessageForm roomId={Number(id)} />
     </div>
   );
 };

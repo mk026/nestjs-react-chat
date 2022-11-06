@@ -5,12 +5,17 @@ import { io, Socket } from "socket.io-client";
 export const MESSAGES_URL = "/messages";
 export const SOCKET_URL = "ws://localhost:8080";
 
+export interface AddMessageDto {
+  content: string;
+  roomId: number;
+}
+
 export interface ServertoClientEvents {
   message: (data: IMessage) => void;
 }
 
 export interface ClientToServerEvents {
-  message: (data: IMessage) => void;
+  message: (data: AddMessageDto) => void;
 }
 
 export const socket: Socket<ServertoClientEvents, ClientToServerEvents> = io(
@@ -45,7 +50,7 @@ export const messageApi = baseApi.injectEndpoints({
         socket.disconnect();
       },
     }),
-    addMessage: builder.mutation<null, IMessage>({
+    addMessage: builder.mutation<null, AddMessageDto>({
       queryFn: (data) => {
         if (socket.disconnected) {
           socket.connect();

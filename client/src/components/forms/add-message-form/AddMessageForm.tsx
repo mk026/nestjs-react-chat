@@ -7,8 +7,14 @@ import {
   MessageFormValues,
   messageValidationSchema,
 } from "../../../validation/messageValidation";
+import { useAddMessageMutation } from "../../../store/api/messageApi";
 
-const AddMessageForm: FC = () => {
+interface AddMessageFormProps {
+  roomId: number;
+}
+
+const AddMessageForm: FC<AddMessageFormProps> = ({ roomId }) => {
+  const [addMessage] = useAddMessageMutation();
   const {
     register,
     handleSubmit,
@@ -18,8 +24,8 @@ const AddMessageForm: FC = () => {
     resolver: yupResolver(messageValidationSchema),
   });
 
-  const addMessageHandler = (values: MessageFormValues) => {
-    console.log(values);
+  const addMessageHandler = ({ content }: MessageFormValues) => {
+    addMessage({ content, roomId });
   };
 
   return (
