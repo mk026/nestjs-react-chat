@@ -1,6 +1,7 @@
 import { Box, Button, CircularProgress, TextField } from "@mui/material";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -8,20 +9,25 @@ import {
   signupValidationSchema,
 } from "../../../validation/signupValidation";
 import { useSignupMutation } from "../../../store/api/authApi";
+import { Paths } from "../../../routes";
 
 const SignupForm: FC = () => {
   const [signup, { isLoading }] = useSignupMutation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<SignupFormValues>({
     mode: "onBlur",
     resolver: yupResolver(signupValidationSchema),
   });
+  const navigate = useNavigate();
 
-  const signupHandler = (values: SignupFormValues) => {
-    signup(values);
+  const signupHandler = async (values: SignupFormValues) => {
+    await signup(values);
+    reset();
+    navigate(Paths.ROOMS);
   };
 
   return (

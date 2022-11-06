@@ -1,6 +1,7 @@
 import { Box, Button, CircularProgress, TextField } from "@mui/material";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -8,20 +9,25 @@ import {
   signinValidationSchema,
 } from "../../../validation/signinValidation";
 import { useSigninMutation } from "../../../store/api/authApi";
+import { Paths } from "../../../routes";
 
 const SigninForm: FC = () => {
   const [signin, { isLoading }] = useSigninMutation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<SigninFormValues>({
     mode: "onBlur",
     resolver: yupResolver(signinValidationSchema),
   });
+  const navigate = useNavigate();
 
-  const signinHandler = (values: SigninFormValues) => {
-    signin(values);
+  const signinHandler = async (values: SigninFormValues) => {
+    await signin(values);
+    reset();
+    navigate(Paths.ROOMS);
   };
 
   return (
