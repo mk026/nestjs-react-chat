@@ -6,6 +6,8 @@ import {
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
 
+import { CreateMessageDto } from '../message/dto/create-message.dto';
+
 @WebSocketGateway({ cors: { origin: '*' } })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   handleConnection(client: Socket) {
@@ -13,8 +15,10 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('message')
-  handleMessage(client: Socket, data: string) {
-    console.log(`Client ${client.id} sended message: ${data}`);
+  handleMessage(client: Socket, data: CreateMessageDto) {
+    console.log(
+      `Client ${client.id} sended message: ${data.content} to room: ${data.roomId}`,
+    );
     return data;
   }
 
