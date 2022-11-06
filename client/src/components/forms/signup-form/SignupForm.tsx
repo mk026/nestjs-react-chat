@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,7 +10,7 @@ import {
 import { useSignupMutation } from "../../../store/api/authApi";
 
 const SignupForm: FC = () => {
-  const [signup] = useSignupMutation();
+  const [signup, { isLoading }] = useSignupMutation();
   const {
     register,
     handleSubmit,
@@ -53,7 +53,13 @@ const SignupForm: FC = () => {
         error={!!errors.confirmPassword}
         helperText={errors.confirmPassword?.message}
       />
-      <Button type="submit">Submit</Button>
+      <Button
+        type="submit"
+        disabled={isLoading}
+        endIcon={isLoading && <CircularProgress size="1rem" color="inherit" />}
+      >
+        Submit
+      </Button>
     </Box>
   );
 };
