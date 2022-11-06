@@ -1,4 +1,6 @@
 import { baseApi, HttpMethod } from "./baseApi";
+import { SigninFormValues } from "../../validation/signinValidation";
+import { SignupFormValues } from "../../validation/signupValidation";
 
 export interface AuthResponse {
   token: string;
@@ -9,10 +11,10 @@ export const SIGNIN_URL = "/signin";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    signup: builder.mutation<AuthResponse, any>({
+    signup: builder.mutation<AuthResponse, SignupFormValues>({
       query: (body) => ({ url: SIGNUP_URL, method: HttpMethod.POST, body }),
     }),
-    signin: builder.mutation<AuthResponse, any>({
+    signin: builder.mutation<AuthResponse, SigninFormValues>({
       query: (body) => ({ url: SIGNIN_URL, method: HttpMethod.POST, body }),
     }),
   }),
