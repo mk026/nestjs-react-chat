@@ -14,11 +14,11 @@ export class UserService {
   ) {}
 
   getUsers() {
-    return;
+    return this.userRepository.find();
   }
 
-  getUser() {
-    return;
+  getUser(id: number) {
+    return this.userRepository.findOneBy({ id });
   }
 
   async createUser(signupCredentialsDto: SignupCredentialsDto) {
