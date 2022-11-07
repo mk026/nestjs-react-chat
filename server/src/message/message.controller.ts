@@ -1,6 +1,15 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  ParseIntPipe,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
+import { CreateMessageDto } from './dto/create-message.dto';
 import { MessageService } from './message.service';
 
 @Controller('messages')
@@ -9,7 +18,12 @@ export class MessageController {
   constructor(private readonly messageService: MessageService) {}
 
   @Get()
-  getMessages() {
-    return this.messageService.getMessages();
+  getMessages(@Query('roomId', ParseIntPipe) roomId: number) {
+    return this.messageService.getMessages(roomId);
+  }
+
+  @Post()
+  createMessages(@Body() createMessageDto: CreateMessageDto) {
+    return this.messageService.createMessage(createMessageDto);
   }
 }
