@@ -1,6 +1,18 @@
-import { Controller, Delete, Get, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
+import { CreateRoomDto } from './dto/create-room.dto';
+import { UpdateRoomDto } from './dto/update-room.dto';
 import { RoomService } from './room.service';
 
 @Controller('rooms')
@@ -13,18 +25,26 @@ export class RoomController {
     return this.roomService.getRooms();
   }
 
-  @Get()
-  getRoom() {
-    return this.roomService.getRoom();
+  @Get(':id')
+  getRoom(@Param('id', ParseIntPipe) id: number) {
+    return this.roomService.getRoom(id);
   }
 
-  @Put()
-  updateRoom() {
-    return this.roomService.updateRoom();
+  @Post()
+  createRoom(@Body() createRoomDto: CreateRoomDto) {
+    return this.roomService.createRoom(createRoomDto);
   }
 
-  @Delete()
-  deleteRoom() {
-    return this.roomService.deleteRoom();
+  @Put(':id')
+  updateRoom(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateRoomDto: UpdateRoomDto,
+  ) {
+    return this.roomService.updateRoom(id, updateRoomDto);
+  }
+
+  @Delete(':id')
+  deleteRoom(@Param('id', ParseIntPipe) id: number) {
+    return this.roomService.deleteRoom(id);
   }
 }
