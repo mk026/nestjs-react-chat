@@ -18,7 +18,7 @@ export const messageApi = baseApi.injectEndpoints({
       ) {
         try {
           await cacheDataLoaded;
-          socket.connect();
+          socket.emit("join", arg);
           socket.on("message", (data: IMessage) => {
             updateCachedData((draft) => {
               draft.push(data);
@@ -28,7 +28,7 @@ export const messageApi = baseApi.injectEndpoints({
           console.log(error);
         }
         await cacheEntryRemoved;
-        socket.disconnect();
+        socket.emit("leave", arg);
       },
     }),
     addMessage: builder.mutation<null, AddMessageDto>({

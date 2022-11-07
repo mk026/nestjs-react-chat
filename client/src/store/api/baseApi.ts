@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { io, Socket } from "socket.io-client";
+
 import { IMessage } from "../../models/IMessage";
 import { AddMessageDto } from "./messageApi";
 
@@ -20,12 +21,12 @@ export interface ServertoClientEvents {
 
 export interface ClientToServerEvents {
   message: (data: AddMessageDto) => void;
+  join: (roomId: number) => void;
+  leave: (roomId: number) => void;
 }
 
-export const socket: Socket<ServertoClientEvents, ClientToServerEvents> = io(
-  SOCKET_URL,
-  { autoConnect: false }
-);
+export const socket: Socket<ServertoClientEvents, ClientToServerEvents> =
+  io(SOCKET_URL);
 
 socket.on("connect", () => {
   console.log("socket connected");
