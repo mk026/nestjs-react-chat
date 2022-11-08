@@ -17,6 +17,10 @@ export class AuthService {
     return `Signin for ${signinCredentialsDto.email}`;
   }
 
+  check({ token }: { token: string }) {
+    return token;
+  }
+
   genetateToken(userId: number) {
     const payload: JwtPayload = { userId };
     return this.jwtService.sign(payload);

@@ -17,4 +17,9 @@ export class AuthController {
   signin(@Body() signinCredentialsDto: SigninCredentialsDto) {
     return this.authService.signin(signinCredentialsDto);
   }
+
+  @Post('/check')
+  check(@Body() body: { token: string }) {
+    return this.authService.check(body);
+  }
 }
