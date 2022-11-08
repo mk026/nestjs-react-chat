@@ -26,8 +26,10 @@ export interface ClientToServerEvents {
   leave: (roomId: number) => void;
 }
 
-export const socket: Socket<ServertoClientEvents, ClientToServerEvents> =
-  io(SOCKET_URL);
+export const socket: Socket<ServertoClientEvents, ClientToServerEvents> = io(
+  SOCKET_URL,
+  { autoConnect: false }
+);
 
 socket.on("connect", () => {
   console.log("socket connected");
