@@ -8,6 +8,7 @@ export interface AuthResponse {
 
 export const SIGNUP_URL = "/auth/signup";
 export const SIGNIN_URL = "/auth/signin";
+export const CHECK_URL = "/auth/check";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -21,6 +22,18 @@ export const authApi = baseApi.injectEndpoints({
     }),
     signin: builder.mutation<AuthResponse, SigninFormValues>({
       query: (body) => ({ url: SIGNIN_URL, method: HttpMethod.POST, body }),
+      async onQueryStarted(arg, { queryFulfilled }) {
+        const token = (await queryFulfilled).data.token;
+        socket.auth = { token };
+        socket.connect();
+      },
+    }),
+    check: builder.mutation<AuthResponse, string>({
+      query: (token) => ({
+        url: CHECK_URL,
+        method: HttpMethod.POST,
+        body: { token },
+      }),
       async onQueryStarted(arg, { queryFulfilled }) {
         const token = (await queryFulfilled).data.token;
         socket.auth = { token };
