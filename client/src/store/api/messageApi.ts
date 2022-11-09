@@ -1,5 +1,6 @@
-import { baseApi, socket } from "./baseApi";
+import { baseApi } from "./baseApi";
 import { IMessage } from "../../models/IMessage";
+import { socketService } from "../../services/socketService";
 
 export const MESSAGES_URL = "/messages";
 
@@ -18,7 +19,7 @@ export const messageApi = baseApi.injectEndpoints({
       ) {
         try {
           await cacheDataLoaded;
-          socket.on("message", (data: IMessage) => {
+          socketService.subscribeToMessages((data: IMessage) => {
             updateCachedData((draft) => {
               draft.push(data);
             });
@@ -31,7 +32,7 @@ export const messageApi = baseApi.injectEndpoints({
     }),
     addMessage: builder.mutation<null, AddMessageDto>({
       queryFn: (data) => {
-        socket.emit("message", data);
+        socketService.sendMessage(data);
         return { data: null };
       },
     }),

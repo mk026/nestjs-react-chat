@@ -1,9 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { io, Socket } from "socket.io-client";
 
 import { RootState } from "..";
-import { IMessage } from "../../models/IMessage";
-import { AddMessageDto } from "./messageApi";
 
 export enum HttpMethod {
   GET = "GET",
@@ -14,26 +11,6 @@ export enum HttpMethod {
 }
 
 export const BASE_URL = "http://localhost:8080";
-export const SOCKET_URL = "ws://localhost:8080";
-
-export interface ServertoClientEvents {
-  message: (data: IMessage) => void;
-}
-
-export interface ClientToServerEvents {
-  message: (data: AddMessageDto) => void;
-  join: (roomId: number) => void;
-  leave: (roomId: number) => void;
-}
-
-export const socket: Socket<ServertoClientEvents, ClientToServerEvents> = io(
-  SOCKET_URL,
-  { autoConnect: false }
-);
-
-socket.on("connect", () => {
-  console.log("socket connected");
-});
 
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({

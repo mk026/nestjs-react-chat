@@ -1,7 +1,8 @@
-import { baseApi, HttpMethod, socket } from "./baseApi";
+import { baseApi, HttpMethod } from "./baseApi";
 import { SigninFormValues } from "../../validation/signinValidation";
 import { SignupFormValues } from "../../validation/signupValidation";
 import { IUser } from "../../models/IUser";
+import { socketService } from "../../services/socketService";
 
 export interface AuthResponse {
   user: IUser;
@@ -18,16 +19,14 @@ export const authApi = baseApi.injectEndpoints({
       query: (body) => ({ url: SIGNUP_URL, method: HttpMethod.POST, body }),
       async onQueryStarted(arg, { queryFulfilled }) {
         const token = (await queryFulfilled).data.token;
-        socket.auth = { token };
-        socket.connect();
+        socketService.connectWithAuthToken(token);
       },
     }),
     signin: builder.mutation<AuthResponse, SigninFormValues>({
       query: (body) => ({ url: SIGNIN_URL, method: HttpMethod.POST, body }),
       async onQueryStarted(arg, { queryFulfilled }) {
         const token = (await queryFulfilled).data.token;
-        socket.auth = { token };
-        socket.connect();
+        socketService.connectWithAuthToken(token);
       },
     }),
     check: builder.mutation<AuthResponse, string>({
@@ -38,8 +37,7 @@ export const authApi = baseApi.injectEndpoints({
       }),
       async onQueryStarted(arg, { queryFulfilled }) {
         const token = (await queryFulfilled).data.token;
-        socket.auth = { token };
-        socket.connect();
+        socketService.connectWithAuthToken(token);
       },
     }),
   }),

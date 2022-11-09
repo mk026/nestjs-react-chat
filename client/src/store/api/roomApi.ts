@@ -1,5 +1,6 @@
-import { baseApi, socket } from "./baseApi";
+import { baseApi } from "./baseApi";
 import { IRoom } from "../../models/IRoom";
+import { socketService } from "../../services/socketService";
 
 export const ROOMS_URL = "/rooms";
 
@@ -12,7 +13,7 @@ export const roomApi = baseApi.injectEndpoints({
       query: (id) => ({ url: `${ROOMS_URL}/${id}` }),
       async onQueryStarted(arg, { queryFulfilled }) {
         await queryFulfilled;
-        socket.emit("join", arg);
+        socketService.joinRoom(arg);
       },
     }),
   }),
