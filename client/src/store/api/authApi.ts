@@ -1,8 +1,10 @@
 import { baseApi, HttpMethod, socket } from "./baseApi";
 import { SigninFormValues } from "../../validation/signinValidation";
 import { SignupFormValues } from "../../validation/signupValidation";
+import { IUser } from "../../models/IUser";
 
 export interface AuthResponse {
+  user: IUser;
   token: string;
 }
 
