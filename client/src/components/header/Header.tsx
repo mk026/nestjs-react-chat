@@ -2,15 +2,16 @@ import { FC } from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 
 import Navbar from "../navbar/Navbar";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAppSelector } from "../../hooks/redux";
 import { getAuthState } from "../../store/selectors/authSelectors";
-import { signout } from "../../store/slices/authSlice";
+import { useActions } from "../../hooks/useActions";
+import { authActions } from "../../store/slices/authSlice";
 
 const Header: FC = () => {
   const { isAuth } = useAppSelector(getAuthState);
-  const dispatch = useAppDispatch();
+  const { signout } = useActions(authActions);
 
-  const signoutHandler = () => dispatch(signout());
+  const signoutHandler = () => signout();
 
   return (
     <Box component="header">

@@ -41,4 +41,4 @@ export const authSlice = createSlice({
   },
 });
 
-export const { signout } = authSlice.actions;
+export const authActions = authSlice.actions;
