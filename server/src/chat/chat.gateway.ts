@@ -5,15 +5,23 @@ import {
   WebSocketGateway,
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
+import { AuthService } from 'src/auth/auth.service';
 
 import { CreateMessageDto } from '../message/dto/create-message.dto';
 
 @WebSocketGateway({ cors: { origin: '*' } })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
+  constructor(private readonly authService: AuthService) {}
+
   handleConnection(client: Socket) {
-    console.log(
-      `Client ${client.id} connected. Auth token: ${client.handshake.auth.token}`,
-    );
+    const token = client.handshake.auth.token;
+    const payload = this.authService.verifyToken(token);
+
+    if (!payload) {
+      client.disconnect(true);
+    } else {
+      console.log(`Client ${client.id} connected. Auth token: ${token}`);
+    }
   }
 
   @SubscribeMessage('join')
