@@ -25,4 +25,8 @@ export class AuthService {
     const payload: JwtPayload = { userId };
     return this.jwtService.sign(payload);
   }
+
+  verifyToken(token: string) {
+    return this.jwtService.verify(token);
+  }
 }
