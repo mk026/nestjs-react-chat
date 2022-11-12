@@ -5,13 +5,17 @@ import {
   WebSocketGateway,
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
-import { AuthService } from 'src/auth/auth.service';
 
+import { AuthService } from '../auth/auth.service';
+import { MessageService } from '../message/message.service';
 import { CreateMessageDto } from '../message/dto/create-message.dto';
 
 @WebSocketGateway({ cors: { origin: '*' } })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly messageService: MessageService,
+  ) {}
 
   handleConnection(client: Socket) {
     const token = client.handshake.auth.token;
@@ -39,14 +43,13 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('message')
-  handleMessage(client: Socket, createMessageDto: CreateMessageDto) {
+  async handleMessage(client: Socket, createMessageDto: CreateMessageDto) {
     console.log(
       `Client ${client.id} sended message: ${createMessageDto.content} to room: ${createMessageDto.roomId}`,
     );
-    client.emit('message', createMessageDto);
-    client
-      .to(createMessageDto.roomId.toString())
-      .emit('message', createMessageDto);
+    const message = await this.messageService.createMessage(createMessageDto);
+    client.emit('message', message);
+    client.to(message.room.toString()).emit('message', message);
   }
 
   handleDisconnect(client: Socket) {
