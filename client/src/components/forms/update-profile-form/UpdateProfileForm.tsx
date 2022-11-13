@@ -7,8 +7,15 @@ import {
   UserFormValues,
   userValidationSchema,
 } from "../../../validation/userValidation";
+import { useUpdateUserMutation } from "../../../store/api/userApi";
+import { IUser } from "../../../models/IUser";
 
-const UpdateProfileForm: FC = () => {
+interface UpdateProfileFormProps {
+  user: IUser;
+}
+
+const UpdateProfileForm: FC<UpdateProfileFormProps> = ({ user }) => {
+  const [updateUser] = useUpdateUserMutation();
   const {
     register,
     handleSubmit,
@@ -19,7 +26,7 @@ const UpdateProfileForm: FC = () => {
   });
 
   const updateProfileHandler = (values: UserFormValues) => {
-    console.log(values);
+    updateUser({ ...user, ...values });
   };
 
   return (
