@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -15,9 +15,10 @@ interface UpdateProfileFormProps {
 }
 
 const UpdateProfileForm: FC<UpdateProfileFormProps> = ({ user }) => {
-  const [updateUser] = useUpdateUserMutation();
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<UserFormValues>({
@@ -25,8 +26,9 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({ user }) => {
     resolver: yupResolver(userValidationSchema),
   });
 
-  const updateProfileHandler = (values: UserFormValues) => {
-    updateUser({ ...user, ...values });
+  const updateProfileHandler = async (values: UserFormValues) => {
+    await updateUser({ ...user, ...values });
+    reset();
   };
 
   return (
@@ -44,6 +46,13 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({ user }) => {
         error={!!errors.email}
         helperText={errors.email?.message}
       />
+      <Button
+        type="submit"
+        disabled={isLoading}
+        endIcon={isLoading && <CircularProgress size="1rem" color="inherit" />}
+      >
+        Submit
+      </Button>
     </Box>
   );
 };
