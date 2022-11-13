@@ -1,11 +1,13 @@
 import * as yup from "yup";
 
+import { userRules } from "./rules";
+
 export interface UserFormValues {
   name: string;
   email: string;
 }
 
 export const userValidationSchema = yup.object({
-  name: yup.string().min(1).max(100).required(),
+  name: yup.string().min(userRules.name.min).max(userRules.name.max).required(),
   email: yup.string().email().required(),
 });

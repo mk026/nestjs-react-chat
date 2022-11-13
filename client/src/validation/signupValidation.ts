@@ -1,5 +1,7 @@
 import * as yup from "yup";
 
+import { userRules } from "./rules";
+
 export interface SignupFormValues {
   name: string;
   email: string;
@@ -8,9 +10,13 @@ export interface SignupFormValues {
 }
 
 export const signupValidationSchema = yup.object({
-  name: yup.string().min(1).max(100).required(),
+  name: yup.string().min(userRules.name.min).max(userRules.name.max).required(),
   email: yup.string().email().required(),
-  password: yup.string().min(8).max(100).required(),
+  password: yup
+    .string()
+    .min(userRules.password.min)
+    .max(userRules.password.max)
+    .required(),
   confirmPassword: yup
     .string()
     .required()
