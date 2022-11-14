@@ -1,4 +1,4 @@
-import { baseApi } from "./baseApi";
+import { baseApi, HttpMethod } from "./baseApi";
 import { IRoom } from "../../models/IRoom";
 import { socketService } from "../../services/socketService";
 
@@ -16,7 +16,15 @@ export const roomApi = baseApi.injectEndpoints({
         socketService.joinRoom(arg);
       },
     }),
+    updateRoom: builder.mutation<IRoom, IRoom>({
+      query: (body) => ({
+        url: `${ROOMS_URL}/${body.id}`,
+        method: HttpMethod.PUT,
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetRoomsQuery, useGetRoomQuery } = roomApi;
+export const { useGetRoomsQuery, useGetRoomQuery, useUpdateRoomMutation } =
+  roomApi;
