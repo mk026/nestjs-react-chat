@@ -4,6 +4,11 @@ import { socketService } from "../../services/socketService";
 
 export const ROOMS_URL = "/rooms";
 
+export interface AddRoomDto {
+  title: string;
+  description: string;
+}
+
 export const roomApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getRooms: builder.query<IRoom[], void>({
@@ -16,6 +21,13 @@ export const roomApi = baseApi.injectEndpoints({
         socketService.joinRoom(arg);
       },
     }),
+    addRoom: builder.mutation<IRoom, AddRoomDto>({
+      query: (body) => ({
+        url: ROOMS_URL,
+        method: HttpMethod.POST,
+        body,
+      }),
+    }),
     updateRoom: builder.mutation<IRoom, IRoom>({
       query: (body) => ({
         url: `${ROOMS_URL}/${body.id}`,
@@ -26,5 +38,9 @@ export const roomApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetRoomsQuery, useGetRoomQuery, useUpdateRoomMutation } =
-  roomApi;
+export const {
+  useGetRoomsQuery,
+  useGetRoomQuery,
+  useAddRoomMutation,
+  useUpdateRoomMutation,
+} = roomApi;
