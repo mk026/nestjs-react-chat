@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -45,6 +45,7 @@ const UpdatePasswordForm: FC = () => {
         error={!!errors.confirmPassword}
         helperText={errors.confirmPassword?.message}
       />
+      <Button type="submit">Submit</Button>
     </Box>
   );
 };
