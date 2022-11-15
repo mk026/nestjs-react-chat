@@ -9,6 +9,12 @@ export interface AddRoomDto {
   description: string;
 }
 
+export interface UpdateRoomDto {
+  id: number;
+  title?: string;
+  description?: string;
+}
+
 export const roomApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getRooms: builder.query<IRoom[], void>({
@@ -28,7 +34,7 @@ export const roomApi = baseApi.injectEndpoints({
         body,
       }),
     }),
-    updateRoom: builder.mutation<IRoom, IRoom>({
+    updateRoom: builder.mutation<IRoom, UpdateRoomDto>({
       query: (body) => ({
         url: `${ROOMS_URL}/${body.id}`,
         method: HttpMethod.PUT,
