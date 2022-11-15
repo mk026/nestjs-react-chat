@@ -1,6 +1,5 @@
 import { baseApi, HttpMethod } from "./baseApi";
 import { IRoom } from "../../models/IRoom";
-import { socketService } from "../../services/socketService";
 
 export const ROOMS_URL = "/rooms";
 
@@ -22,10 +21,6 @@ export const roomApi = baseApi.injectEndpoints({
     }),
     getRoom: builder.query<IRoom, number>({
       query: (id) => ({ url: `${ROOMS_URL}/${id}` }),
-      async onQueryStarted(arg, { queryFulfilled }) {
-        await queryFulfilled;
-        socketService.joinRoom(arg);
-      },
     }),
     addRoom: builder.mutation<IRoom, AddRoomDto>({
       query: (body) => ({

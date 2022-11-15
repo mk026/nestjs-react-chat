@@ -19,6 +19,7 @@ export const messageApi = baseApi.injectEndpoints({
       ) {
         try {
           await cacheDataLoaded;
+          socketService.joinRoom(arg);
           socketService.subscribeToMessages((data: IMessage) => {
             updateCachedData((draft) => {
               draft.push(data);
