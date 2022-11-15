@@ -7,8 +7,15 @@ import {
   RoomFormValues,
   roomValidationSchema,
 } from "../../../validation/roomValidation";
+import { useUpdateRoomMutation } from "../../../store/api/roomApi";
+import { IRoom } from "../../../models/IRoom";
 
-const UpdateRoomForm: FC = () => {
+interface UpdateRoomFormProps {
+  room: IRoom;
+}
+
+const UpdateRoomForm: FC<UpdateRoomFormProps> = ({ room }) => {
+  const [updateRoom] = useUpdateRoomMutation();
   const {
     register,
     handleSubmit,
@@ -19,7 +26,7 @@ const UpdateRoomForm: FC = () => {
   });
 
   const updateRoomHandler = (values: RoomFormValues) => {
-    console.log(values);
+    updateRoom({ ...room, ...values });
   };
 
   return (
