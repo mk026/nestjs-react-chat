@@ -36,6 +36,12 @@ export const roomApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    deleteRoom: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `${ROOMS_URL}/${id}`,
+        method: HttpMethod.DELETE,
+      }),
+    }),
   }),
 });
 
