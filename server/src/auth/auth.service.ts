@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { UserService } from 'src/user/user.service';
@@ -24,8 +24,19 @@ export class AuthService {
     return { user, token };
   }
 
-  signin(signinCredentialsDto: SigninCredentialsDto) {
-    return `Signin for ${signinCredentialsDto.email}`;
+  async signin(signinCredentialsDto: SigninCredentialsDto) {
+    const user = await this.userService.getUserByEmail(
+      signinCredentialsDto.email,
+    );
+    const isPasswordValid = this.verifyPassword(
+      signinCredentialsDto.password,
+      user.password,
+    );
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid email or password');
+    }
+    const token = this.genetateToken(user.id);
+    return { user, token };
   }
 
   check({ token }: { token: string }) {
@@ -34,6 +45,10 @@ export class AuthService {
 
   hashPassword(password: string) {
     return bcrypt.hashSync(password);
+  }
+
+  verifyPassword(password: string, hash: string) {
+    return bcrypt.compareSync(password, hash);
   }
 
   genetateToken(userId: number) {
