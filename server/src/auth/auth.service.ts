@@ -20,7 +20,7 @@ export class AuthService {
       ...signupCredentialsDto,
       password: passwordHash,
     });
-    const token = this.genetateToken(user.id);
+    const token = this.generateToken(user.id);
     return { user, token };
   }
 
@@ -35,7 +35,7 @@ export class AuthService {
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid email or password');
     }
-    const token = this.genetateToken(user.id);
+    const token = this.generateToken(user.id);
     return { user, token };
   }
 
@@ -51,7 +51,7 @@ export class AuthService {
     return bcrypt.compareSync(password, hash);
   }
 
-  genetateToken(userId: number) {
+  generateToken(userId: number) {
     const payload: JwtPayload = { userId };
     return this.jwtService.sign(payload);
   }
