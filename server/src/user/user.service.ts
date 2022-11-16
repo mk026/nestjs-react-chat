@@ -25,6 +25,7 @@ export class UserService {
   async createUser(signupCredentialsDto: SignupCredentialsDto) {
     const user = this.userRepository.create(signupCredentialsDto);
     await this.userRepository.save(user);
+    return user;
   }
 
   async updateUser(id: number, updateUserDto: UpdateUserDto) {
