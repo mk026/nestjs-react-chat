@@ -22,18 +22,6 @@ const Navbar: FC = () => {
         component={NavLink}
         to={Paths.PROFILE}
       />
-      <Tab
-        label="Signup"
-        value={Paths.SIGNUP}
-        component={NavLink}
-        to={Paths.SIGNUP}
-      />
-      <Tab
-        label="Signin"
-        value={Paths.SIGNIN}
-        component={NavLink}
-        to={Paths.SIGNIN}
-      />
     </Tabs>
   );
 };

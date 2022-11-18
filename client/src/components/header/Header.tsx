@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Stack, Typography } from "@mui/material";
 
+import AuthLinks from "../auth-links/AuthLinks";
 import Navbar from "../navbar/Navbar";
 import { useAppSelector } from "../../hooks/redux";
 import { getAuthState } from "../../store/selectors/authSelectors";
@@ -24,6 +25,7 @@ const Header: FC = () => {
       <Stack direction="row" alignItems="center">
         <Typography mr="2rem">React Chat</Typography>
         <Navbar />
+        {!isAuth && <AuthLinks />}
         {isAuth && <Button onClick={signoutHandler}>Logout</Button>}
       </Stack>
     </Box>
