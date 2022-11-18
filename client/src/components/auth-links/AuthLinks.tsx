@@ -6,11 +6,16 @@ import { Paths } from "../../routes";
 
 const AuthLinks: FC = () => {
   return (
-    <Stack>
-      <Button component={NavLink} to={Paths.SIGNUP}>
+    <Stack direction="row" sx={{ marginLeft: "auto" }}>
+      <Button
+        component={NavLink}
+        to={Paths.SIGNUP}
+        variant="outlined"
+        sx={{ marginRight: "1rem" }}
+      >
         Create Account
       </Button>
-      <Button component={NavLink} to={Paths.SIGNIN}>
+      <Button component={NavLink} to={Paths.SIGNIN} variant="contained">
         Signin
       </Button>
     </Stack>
