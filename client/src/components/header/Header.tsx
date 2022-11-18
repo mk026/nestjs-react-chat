@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Box, Button, Stack, Typography } from "@mui/material";
 
 import AuthLinks from "../auth-links/AuthLinks";
@@ -23,7 +23,9 @@ const Header: FC = () => {
   return (
     <Box component="header">
       <Stack direction="row" alignItems="center">
-        <Typography mr="2rem">React Chat</Typography>
+        <Typography mr="2rem" component={NavLink} to={Paths.HOME}>
+          React Chat
+        </Typography>
         <Navbar />
         {!isAuth && <AuthLinks />}
         {isAuth && <Button onClick={signoutHandler}>Logout</Button>}
