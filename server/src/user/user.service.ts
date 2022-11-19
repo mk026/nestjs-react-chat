@@ -1,5 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AuthService } from 'src/auth/auth.service';
 import { Repository } from 'typeorm';
 
 import { SignupCredentialsDto } from '../auth/dto/signup-credentials.dto';
@@ -12,6 +17,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly authService: AuthService,
   ) {}
 
   getUsers() {
@@ -40,7 +46,18 @@ export class UserService {
   }
 
   async updatePassword(id: number, updatePasswordDto: UpdatePasswordDto) {
-    return `Updating password for user with id ${id}`;
+    const { oldPassword, newPassword } = updatePasswordDto;
+    const user = await this.userRepository.findOneBy({ id });
+    const isPasswordValid = this.authService.verifyPassword(
+      oldPassword,
+      user.password,
+    );
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+    const newPasswordHash = this.authService.hashPassword(newPassword);
+    user.password = newPasswordHash;
+    await this.userRepository.save(user);
   }
 
   async deleteUser(id: number) {
