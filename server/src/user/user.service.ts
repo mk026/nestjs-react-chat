@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -33,6 +34,10 @@ export class UserService {
   }
 
   async createUser(signupCredentialsDto: SignupCredentialsDto) {
+    const foundUser = await this.getUserByEmail(signupCredentialsDto.email);
+    if (foundUser) {
+      throw new ConflictException('Email already in use');
+    }
     const user = this.userRepository.create(signupCredentialsDto);
     await this.userRepository.save(user);
     return user;
