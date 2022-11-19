@@ -28,6 +28,9 @@ export class AuthService {
     const user = await this.userService.getUserByEmail(
       signinCredentialsDto.email,
     );
+    if (!user) {
+      throw new UnauthorizedException('Invalid email or password');
+    }
     const isPasswordValid = this.verifyPassword(
       signinCredentialsDto.password,
       user.password,
