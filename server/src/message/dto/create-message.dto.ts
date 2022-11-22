@@ -7,4 +7,8 @@ export class CreateMessageDto {
 
   @IsNotEmpty()
   readonly content: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  readonly ownerId: number;
 }
