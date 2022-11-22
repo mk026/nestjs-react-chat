@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateRoomDto {
   @IsNotEmpty()
@@ -6,4 +6,8 @@ export class CreateRoomDto {
 
   @IsNotEmpty()
   readonly description: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  readonly ownerId: number;
 }
