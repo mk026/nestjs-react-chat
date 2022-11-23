@@ -3,6 +3,7 @@ import { IUser } from "../../models/IUser";
 
 import { socketService } from "../../services/socketService";
 import { authApi } from "../api/authApi";
+import { userApi } from "../api/userApi";
 
 export interface AuthState {
   isAuth: boolean;
@@ -41,6 +42,12 @@ export const authSlice = createSlice({
         state.isAuth = true;
         state.token = payload.token;
         state.user = payload.user;
+      }
+    );
+    builder.addMatcher(
+      userApi.endpoints.updateUser.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload;
       }
     );
   },
