@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { UserService } from 'src/user/user.service';
@@ -7,10 +12,20 @@ import { SigninCredentialsDto } from './dto/signin-credentials.dto';
 import { SignupCredentialsDto } from './dto/signup-credentials.dto';
 import { JwtPayload } from './jwt-payload.interface';
 
+const dummyUser = {
+  id: 1,
+  name: 'userone',
+  email: 'test@test.com',
+  password: '11111111',
+  messages: [],
+  rooms: [],
+};
+
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
+    @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
   ) {}
 
@@ -38,8 +53,8 @@ export class AuthService {
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid email or password');
     }
-    const token = this.generateToken(user.id);
-    return { user, token };
+    const token = this.generateToken(dummyUser.id);
+    return { user: dummyUser, token };
   }
 
   check({ token }: { token: string }) {
