@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -10,7 +10,7 @@ import {
 import { useUpdatePasswordMutation } from "../../../store/api/userApi";
 
 const UpdatePasswordForm: FC = () => {
-  const [updatePassword] = useUpdatePasswordMutation();
+  const [updatePassword, { isLoading }] = useUpdatePasswordMutation();
   const {
     register,
     handleSubmit,
@@ -47,7 +47,13 @@ const UpdatePasswordForm: FC = () => {
         error={!!errors.confirmPassword}
         helperText={errors.confirmPassword?.message}
       />
-      <Button type="submit">Submit</Button>
+      <Button
+        type="submit"
+        disabled={isLoading}
+        endIcon={isLoading && <CircularProgress size="1rem" color="inherit" />}
+      >
+        Submit
+      </Button>
     </Box>
   );
 };
