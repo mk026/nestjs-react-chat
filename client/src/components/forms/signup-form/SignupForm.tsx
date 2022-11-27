@@ -1,8 +1,8 @@
-import { Box, Button, CircularProgress, TextField } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
 
 import {
   SignupFormValues,
@@ -12,7 +12,7 @@ import { useSignupMutation } from "../../../store/api/authApi";
 import { Paths } from "../../../routes";
 
 const SignupForm: FC = () => {
-  const [signup, { isLoading }] = useSignupMutation();
+  const [signup, { isLoading, isSuccess }] = useSignupMutation();
   const {
     register,
     handleSubmit,
@@ -24,10 +24,15 @@ const SignupForm: FC = () => {
   });
   const navigate = useNavigate();
 
-  const signupHandler = async (values: SignupFormValues) => {
-    await signup(values);
-    reset();
-    navigate(Paths.ROOMS);
+  useEffect(() => {
+    if (isSuccess) {
+      reset();
+      navigate(Paths.ROOMS);
+    }
+  }, [isSuccess, navigate, reset]);
+
+  const signupHandler = (values: SignupFormValues) => {
+    signup(values);
   };
 
   return (
