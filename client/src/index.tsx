@@ -1,3 +1,4 @@
+import { StyledEngineProvider } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
@@ -13,7 +14,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <StyledEngineProvider injectFirst>
+          <App />
+        </StyledEngineProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
