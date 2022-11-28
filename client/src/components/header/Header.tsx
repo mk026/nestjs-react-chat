@@ -10,6 +10,8 @@ import { useActions } from "../../hooks/useActions";
 import { authActions } from "../../store/slices/authSlice";
 import { Paths } from "../../routes";
 
+import classes from "./Header.module.scss";
+
 const Header: FC = () => {
   const { isAuth } = useAppSelector(getAuthState);
   const { signout } = useActions(authActions);
@@ -21,7 +23,7 @@ const Header: FC = () => {
   };
 
   return (
-    <Box component="header">
+    <Box component="header" className={classes.header}>
       <Stack direction="row" alignItems="center">
         <Typography mr="2rem" component={NavLink} to={Paths.HOME}>
           React Chat
