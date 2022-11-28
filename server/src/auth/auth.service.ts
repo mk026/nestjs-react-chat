@@ -12,15 +12,6 @@ import { SigninCredentialsDto } from './dto/signin-credentials.dto';
 import { SignupCredentialsDto } from './dto/signup-credentials.dto';
 import { JwtPayload } from './jwt-payload.interface';
 
-const dummyUser = {
-  id: 1,
-  name: 'userone',
-  email: 'test@test.com',
-  password: '11111111',
-  messages: [],
-  rooms: [],
-};
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -53,8 +44,8 @@ export class AuthService {
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid email or password');
     }
-    const token = this.generateToken(dummyUser.id);
-    return { user: dummyUser, token };
+    const token = this.generateToken(user.id);
+    return { user, token };
   }
 
   check({ token }: { token: string }) {
