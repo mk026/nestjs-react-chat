@@ -4,6 +4,8 @@ import { Button, Stack } from "@mui/material";
 
 import { Paths } from "../../routes";
 
+import classes from "./AuthLinks.module.scss";
+
 const AuthLinks: FC = () => {
   return (
     <Stack direction="row" sx={{ marginLeft: "auto" }}>
@@ -11,7 +13,7 @@ const AuthLinks: FC = () => {
         component={NavLink}
         to={Paths.SIGNUP}
         variant="outlined"
-        sx={{ marginRight: "1rem" }}
+        classes={{ root: classes["signup-btn"] }}
       >
         Create Account
       </Button>
