@@ -9,6 +9,8 @@ import {
 } from "../../../validation/messageValidation";
 import { useAddMessageMutation } from "../../../store/api/messageApi";
 
+import classes from "./AddMessageForm.module.scss";
+
 interface AddMessageFormProps {
   roomId: number;
 }
@@ -29,7 +31,11 @@ const AddMessageForm: FC<AddMessageFormProps> = ({ roomId }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(addMessageHandler)}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit(addMessageHandler)}
+      className={classes.form}
+    >
       <TextField
         multiline
         placeholder="Enter your message..."
