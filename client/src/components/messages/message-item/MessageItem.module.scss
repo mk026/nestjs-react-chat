@@ -2,9 +2,16 @@
   padding: 1rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  margin-left: auto;
-  margin-right: auto;
 
-  background-color: #c7ccec;
   border-radius: 0.5rem;
+
+  &.message--own {
+    margin-left: auto;
+    background-color: #c7e9ec;
+  }
+
+  &.message--other {
+    margin-right: auto;
+    background-color: #c7ccec;
+  }
 }
