@@ -7,8 +7,8 @@ export const PASSWORD_UPDATE_URL = "/users/password";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getUsers: builder.query<IUser[], void>({
-      query: () => ({ url: USERS_URL }),
+    getUsers: builder.query<IUser[], number>({
+      query: (roomId) => ({ url: USERS_URL, params: { roomId } }),
     }),
     getUser: builder.query<IUser, number>({
       query: (id: number) => ({ url: `${USERS_URL}/${id}` }),
