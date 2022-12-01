@@ -28,7 +28,7 @@ const Header: FC = () => {
         <Typography mr="2rem" component={NavLink} to={Paths.HOME}>
           React Chat
         </Typography>
-        <Navbar />
+        {isAuth && <Navbar />}
         {!isAuth && <AuthLinks />}
         {isAuth && <Button onClick={signoutHandler}>Logout</Button>}
       </Stack>
