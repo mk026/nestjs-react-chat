@@ -13,8 +13,8 @@ const MessageItem: FC<MessageItemProps> = ({ message }) => {
   return (
     <Box>
       <Stack direction="row" alignItems="center">
-        <Avatar>{message.ownerId}</Avatar>
-        <Typography>Username</Typography>
+        <Avatar alt={message.owner.name} src={message.owner.avatarUrl} />
+        <Typography>{message.owner.name}</Typography>
       </Stack>
       <Card classes={{ root: classes.message }}>
         <Typography variant="body1">{message.content}</Typography>
