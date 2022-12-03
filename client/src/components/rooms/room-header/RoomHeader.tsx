@@ -15,7 +15,7 @@ const RoomHeader: FC<RoomHeaderProps> = ({ room }) => {
   return (
     <Stack direction="row" className={classes["room-header"]}>
       <Typography>{room.title}</Typography>
-      <RoomMembers />
+      <RoomMembers members={room.members} />
       <RoomControls />
     </Stack>
   );
