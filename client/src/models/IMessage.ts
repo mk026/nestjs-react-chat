@@ -1,6 +1,8 @@
+import { IUser } from "./IUser";
+
 export interface IMessage {
   id: number;
-  ownerId: number;
+  owner: IUser;
   roomId: number;
   content: string;
 }
