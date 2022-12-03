@@ -1,6 +1,8 @@
 import {
   Column,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -25,4 +27,8 @@ export class Room {
 
   @ManyToOne(() => User, (user) => user.rooms)
   owner: User;
+
+  @ManyToMany(() => User, (user) => user.joinedRooms)
+  @JoinTable()
+  members: User[];
 }

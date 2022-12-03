@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   Unique,
@@ -29,4 +30,7 @@ export class User {
 
   @OneToMany(() => Room, (room) => room.owner)
   rooms: Room[];
+
+  @ManyToMany(() => Room, (room) => room.members)
+  joinedRooms: Room[];
 }
