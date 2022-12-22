@@ -4,14 +4,12 @@ import {
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
-  Unique,
 } from 'typeorm';
 
 import { Message } from '../message/message.entity';
 import { Room } from '../room/room.entity';
 
 @Entity()
-@Unique(['email'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -19,7 +17,7 @@ export class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
