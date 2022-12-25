@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { AuthResponse } from './auth-response.interface';
 
+import { AuthResponse } from './interfaces/auth-response.interface';
 import { AuthService } from './auth.service';
 import { SigninCredentialsDto } from './dto/signin-credentials.dto';
 import { SignupCredentialsDto } from './dto/signup-credentials.dto';
