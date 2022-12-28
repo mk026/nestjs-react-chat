@@ -1,22 +1,25 @@
 import { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
   RoomFormValues,
   roomValidationSchema,
 } from "../../../validation/roomValidation";
+import { useAddRoomMutation } from "../../../store/api/roomApi";
 import FormField from "../../form-field/FormField";
+import LoadingButton from "../../loading-button/LoadingButton";
 
 const AddRoomForm: FC = () => {
+  const [addRoom, { isLoading }] = useAddRoomMutation();
   const methods = useForm<RoomFormValues>({
     mode: "onBlur",
     resolver: yupResolver(roomValidationSchema),
   });
 
   const addRoomHandler = (values: RoomFormValues) => {
-    console.log(values);
+    addRoom(values);
   };
 
   return (
@@ -24,7 +27,7 @@ const AddRoomForm: FC = () => {
       <Box component="form" onSubmit={methods.handleSubmit(addRoomHandler)}>
         <FormField label="Room name" name="title" />
         <FormField label="Room description" name="description" />
-        <Button type="submit">Send</Button>
+        <LoadingButton isLoading={isLoading}>Save</LoadingButton>
       </Box>
     </FormProvider>
   );
