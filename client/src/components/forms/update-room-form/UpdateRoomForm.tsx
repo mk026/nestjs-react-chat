@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { useForm } from "react-hook-form";
-import { Box, TextField } from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form";
+import { Box } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -9,6 +9,7 @@ import {
 } from "../../../validation/roomValidation";
 import { useUpdateRoomMutation } from "../../../store/api/roomApi";
 import { IRoom } from "../../../models/IRoom";
+import FormField from "../../form-field/FormField";
 import LoadingButton from "../../loading-button/LoadingButton";
 
 interface UpdateRoomFormProps {
@@ -17,11 +18,7 @@ interface UpdateRoomFormProps {
 
 const UpdateRoomForm: FC<UpdateRoomFormProps> = ({ room }) => {
   const [updateRoom, { isLoading }] = useUpdateRoomMutation();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<RoomFormValues>({
+  const methods = useForm<RoomFormValues>({
     mode: "onBlur",
     resolver: yupResolver(roomValidationSchema),
   });
@@ -31,21 +28,13 @@ const UpdateRoomForm: FC<UpdateRoomFormProps> = ({ room }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(updateRoomHandler)}>
-      <TextField
-        label="Room name"
-        {...register("title")}
-        error={!!errors.title}
-        helperText={errors.title?.message}
-      />
-      <TextField
-        label="Room description"
-        {...register("description")}
-        error={!!errors.description}
-        helperText={errors.description?.message}
-      />
-      <LoadingButton isLoading={isLoading}>Update</LoadingButton>
-    </Box>
+    <FormProvider {...methods}>
+      <Box component="form" onSubmit={methods.handleSubmit(updateRoomHandler)}>
+        <FormField label="Room name" name="title" />
+        <FormField label="Room description" name="description" />
+        <LoadingButton isLoading={isLoading}>Update</LoadingButton>
+      </Box>
+    </FormProvider>
   );
 };
 
