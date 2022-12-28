@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { Box, Button, CircularProgress, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -9,6 +9,7 @@ import {
 } from "../../../validation/userValidation";
 import { useUpdateUserMutation } from "../../../store/api/userApi";
 import { IUser } from "../../../models/IUser";
+import LoadingButton from "../../loading-button/LoadingButton";
 
 interface UpdateProfileFormProps {
   user: IUser;
@@ -46,13 +47,7 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({ user }) => {
         error={!!errors.email}
         helperText={errors.email?.message}
       />
-      <Button
-        type="submit"
-        disabled={isLoading}
-        endIcon={isLoading && <CircularProgress size="1rem" color="inherit" />}
-      >
-        Submit
-      </Button>
+      <LoadingButton isLoading={isLoading}>Submit</LoadingButton>
     </Box>
   );
 };

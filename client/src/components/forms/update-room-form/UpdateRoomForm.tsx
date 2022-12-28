@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { Box, Button, CircularProgress, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -9,6 +9,7 @@ import {
 } from "../../../validation/roomValidation";
 import { useUpdateRoomMutation } from "../../../store/api/roomApi";
 import { IRoom } from "../../../models/IRoom";
+import LoadingButton from "../../loading-button/LoadingButton";
 
 interface UpdateRoomFormProps {
   room: IRoom;
@@ -43,13 +44,7 @@ const UpdateRoomForm: FC<UpdateRoomFormProps> = ({ room }) => {
         error={!!errors.description}
         helperText={errors.description?.message}
       />
-      <Button
-        type="submit"
-        disabled={isLoading}
-        endIcon={isLoading && <CircularProgress size="1rem" color="inherit" />}
-      >
-        Update
-      </Button>
+      <LoadingButton isLoading={isLoading}>Update</LoadingButton>
     </Box>
   );
 };
