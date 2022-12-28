@@ -1,19 +1,16 @@
 import { FC } from "react";
-import { useForm } from "react-hook-form";
-import { Box, Button, TextField } from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form";
+import { Box, Button } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
   RoomFormValues,
   roomValidationSchema,
 } from "../../../validation/roomValidation";
+import FormField from "../../form-field/FormField";
 
 const AddRoomForm: FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<RoomFormValues>({
+  const methods = useForm<RoomFormValues>({
     mode: "onBlur",
     resolver: yupResolver(roomValidationSchema),
   });
@@ -23,21 +20,13 @@ const AddRoomForm: FC = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(addRoomHandler)}>
-      <TextField
-        label="Room name"
-        {...register("title")}
-        error={!!errors.title}
-        helperText={errors.title?.message}
-      />
-      <TextField
-        label="Room description"
-        {...register("description")}
-        error={!!errors.description}
-        helperText={errors.description?.message}
-      />
-      <Button type="submit">Send</Button>
-    </Box>
+    <FormProvider {...methods}>
+      <Box component="form" onSubmit={methods.handleSubmit(addRoomHandler)}>
+        <FormField label="Room name" name="title" />
+        <FormField label="Room description" name="description" />
+        <Button type="submit">Send</Button>
+      </Box>
+    </FormProvider>
   );
 };
 

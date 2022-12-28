@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { useForm } from "react-hook-form";
-import { Box, Button, TextField } from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form";
+import { Box, Button } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -8,6 +8,7 @@ import {
   messageValidationSchema,
 } from "../../../validation/messageValidation";
 import { useAddMessageMutation } from "../../../store/api/messageApi";
+import FormField from "../../form-field/FormField";
 
 import classes from "./AddMessageForm.module.scss";
 
@@ -17,11 +18,7 @@ interface AddMessageFormProps {
 
 const AddMessageForm: FC<AddMessageFormProps> = ({ roomId }) => {
   const [addMessage] = useAddMessageMutation();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<MessageFormValues>({
+  const methods = useForm<MessageFormValues>({
     mode: "onBlur",
     resolver: yupResolver(messageValidationSchema),
   });
@@ -31,20 +28,16 @@ const AddMessageForm: FC<AddMessageFormProps> = ({ roomId }) => {
   };
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit(addMessageHandler)}
-      className={classes.form}
-    >
-      <TextField
-        multiline
-        placeholder="Enter your message..."
-        {...register("content")}
-        error={!!errors.content}
-        helperText={errors.content?.message}
-      />
-      <Button type="submit">Send</Button>
-    </Box>
+    <FormProvider {...methods}>
+      <Box
+        component="form"
+        onSubmit={methods.handleSubmit(addMessageHandler)}
+        className={classes.form}
+      >
+        <FormField name="content" multiline />
+        <Button type="submit">Send</Button>
+      </Box>
+    </FormProvider>
   );
 };
 
