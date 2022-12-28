@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { useForm } from "react-hook-form";
-import { Box, TextField } from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form";
+import { Box } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -9,6 +9,7 @@ import {
 } from "../../../validation/userValidation";
 import { useUpdateUserMutation } from "../../../store/api/userApi";
 import { IUser } from "../../../models/IUser";
+import FormField from "../../form-field/FormField";
 import LoadingButton from "../../loading-button/LoadingButton";
 
 interface UpdateProfileFormProps {
@@ -17,38 +18,27 @@ interface UpdateProfileFormProps {
 
 const UpdateProfileForm: FC<UpdateProfileFormProps> = ({ user }) => {
   const [updateUser, { isLoading }] = useUpdateUserMutation();
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UserFormValues>({
+  const methods = useForm<UserFormValues>({
     mode: "onBlur",
     resolver: yupResolver(userValidationSchema),
   });
 
   const updateProfileHandler = async (values: UserFormValues) => {
     await updateUser({ ...user, ...values });
-    reset();
+    methods.reset();
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(updateProfileHandler)}>
-      <TextField
-        label="Name"
-        {...register("name")}
-        error={!!errors.name}
-        helperText={errors.name?.message}
-      />
-      <TextField
-        label="Email"
-        type="email"
-        {...register("email")}
-        error={!!errors.email}
-        helperText={errors.email?.message}
-      />
-      <LoadingButton isLoading={isLoading}>Submit</LoadingButton>
-    </Box>
+    <FormProvider {...methods}>
+      <Box
+        component="form"
+        onSubmit={methods.handleSubmit(updateProfileHandler)}
+      >
+        <FormField label="Name" name="name" />
+        <FormField label="Email" name="email" type="email" />
+        <LoadingButton isLoading={isLoading}>Submit</LoadingButton>
+      </Box>
+    </FormProvider>
   );
 };
 
