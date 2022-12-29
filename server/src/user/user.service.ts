@@ -1,27 +1,23 @@
 import {
   ConflictException,
-  forwardRef,
-  Inject,
   Injectable,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthService } from '../auth/auth.service';
 import { Repository } from 'typeorm';
 
 import { SignupCredentialsDto } from '../auth/dto/signup-credentials.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
+import { Hash } from '../common/utils/hash.util';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    @Inject(forwardRef(() => AuthService))
-    private readonly authService: AuthService,
   ) {}
 
   getUsers() {
@@ -59,14 +55,11 @@ export class UserService {
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
     }
-    const isPasswordValid = this.authService.verifyPassword(
-      oldPassword,
-      user.password,
-    );
+    const isPasswordValid = Hash.compare(oldPassword, user.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    const newPasswordHash = this.authService.hashPassword(newPassword);
+    const newPasswordHash = Hash.generateHash(newPassword);
     user.password = newPasswordHash;
     await this.userRepository.save(user);
   }
