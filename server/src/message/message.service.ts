@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { CreateMessageDto } from './dto/create-message.dto';
+import { GetMessagesDto } from './dto/get-messages.dto';
 import { Message } from './message.entity';
 
 @Injectable()
@@ -12,8 +13,10 @@ export class MessageService {
     private readonly messageRepository: Repository<Message>,
   ) {}
 
-  getMessages(roomId: number) {
-    return this.messageRepository.findBy({ room: { id: roomId } });
+  getMessages(getMessagesDto: GetMessagesDto) {
+    return this.messageRepository.findBy({
+      room: { id: getMessagesDto.roomId },
+    });
   }
 
   async createMessage(createMessageDto: CreateMessageDto) {
