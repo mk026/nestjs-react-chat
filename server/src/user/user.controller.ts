@@ -30,12 +30,9 @@ export class UserController {
     return this.userService.getUser(id);
   }
 
-  @Put(':id')
-  updateUser(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateUserDto: UpdateUserDto,
-  ) {
-    return this.userService.updateUser(id, updateUserDto);
+  @Put()
+  updateUser(@AuthUser() userId: number, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.updateUser(userId, updateUserDto);
   }
 
   @Put('/password')
