@@ -1,7 +1,8 @@
-import { PickType } from '@nestjs/mapped-types';
+import { Type } from 'class-transformer';
+import { IsInt } from 'class-validator';
 
-import { CreateMessageDto } from './create-message.dto';
-
-export class GetMessagesDto extends PickType(CreateMessageDto, [
-  'roomId',
-] as const) {}
+export class GetMessagesDto {
+  @IsInt()
+  @Type(() => Number)
+  readonly roomId: number;
+}
