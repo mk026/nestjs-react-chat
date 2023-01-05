@@ -37,7 +37,13 @@ export class UserService {
     if (foundUser) {
       throw new ConflictException('Email already in use');
     }
-    const user = this.userRepository.create(signupCredentialsDto);
+    const passwordHash = Hash.generateHash(signupCredentialsDto.password);
+    const user = this.userRepository.create({
+      name: signupCredentialsDto.name,
+      bio: signupCredentialsDto.bio,
+      email: signupCredentialsDto.email,
+      password: passwordHash,
+    });
     await this.userRepository.save(user);
     return user;
   }
