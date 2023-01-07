@@ -21,20 +21,30 @@ export class RoomService {
     return this.roomRepository.findOneBy({ id });
   }
 
-  async createRoom(createRoomDto: CreateRoomDto) {
-    const room = this.roomRepository.create(createRoomDto);
+  async createRoom(createRoomDto: CreateRoomDto, userId: number) {
+    const room = this.roomRepository.create({
+      title: createRoomDto.title,
+      description: createRoomDto.description,
+      owner: { id: userId },
+    });
     await this.roomRepository.save(room);
   }
 
-  async updateRoom(id: number, updateRoomDto: UpdateRoomDto) {
-    const result = await this.roomRepository.update(id, updateRoomDto);
+  async updateRoom(id: number, updateRoomDto: UpdateRoomDto, userId: number) {
+    const result = await this.roomRepository.update(
+      { id, owner: { id: userId } },
+      updateRoomDto,
+    );
     if (result.affected === 0) {
       throw new NotFoundException(`Room with id ${id} not found`);
     }
   }
 
-  async deleteRoom(id: number) {
-    const result = await this.roomRepository.delete(id);
+  async deleteRoom(id: number, userId: number) {
+    const result = await this.roomRepository.delete({
+      id,
+      owner: { id: userId },
+    });
     if (result.affected === 0) {
       throw new NotFoundException(`Room with id ${id} not found`);
     }
