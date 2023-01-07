@@ -1,12 +1,14 @@
 import { Type } from 'class-transformer';
-import { IsInt } from 'class-validator';
+import { IsInt, IsOptional } from 'class-validator';
 
 export class PaginationDto {
+  @IsOptional()
   @IsInt()
   @Type(() => Number)
-  readonly skip: number;
+  readonly skip?: number;
 
+  @IsOptional()
   @IsInt()
   @Type(() => Number)
-  readonly take: number;
+  readonly take?: number;
 }
