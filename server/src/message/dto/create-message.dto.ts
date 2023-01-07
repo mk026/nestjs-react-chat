@@ -1,8 +1,7 @@
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsInt, IsNotEmpty } from 'class-validator';
 
 export class CreateMessageDto {
-  @IsNumber()
-  @IsNotEmpty()
+  @IsInt()
   readonly roomId: number;
 
   @IsNotEmpty()
