@@ -43,8 +43,8 @@ export class UserController {
     return this.userService.updatePassword(id, updatePasswordDto);
   }
 
-  @Delete(':id')
-  deleteUser(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.deleteUser(id);
+  @Delete()
+  deleteUser(@AuthUser() userId: number) {
+    return this.userService.deleteUser(userId);
   }
 }
