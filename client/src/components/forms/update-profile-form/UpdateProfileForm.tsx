@@ -35,6 +35,7 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({ user }) => {
         onSubmit={methods.handleSubmit(updateProfileHandler)}
       >
         <FormField label="Name" name="name" />
+        <FormField label="About yorself" name="bio" multiline />
         <FormField label="Email" name="email" type="email" />
         <LoadingButton isLoading={isLoading}>Submit</LoadingButton>
       </Box>

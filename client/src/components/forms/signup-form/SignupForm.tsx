@@ -36,6 +36,7 @@ const SignupForm: FC = () => {
     <FormProvider {...methods}>
       <Box component="form" onSubmit={methods.handleSubmit(signupHandler)}>
         <FormField label="Name" name="name" />
+        <FormField label="About yourself" name="bio" multiline />
         <FormField label="Email" name="email" type="email" />
         <FormField label="Password" name="password" type="password" />
         <FormField
