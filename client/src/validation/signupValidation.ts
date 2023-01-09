@@ -4,6 +4,7 @@ import { userRules } from "./rules";
 
 export interface SignupFormValues {
   name: string;
+  bio?: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -11,6 +12,7 @@ export interface SignupFormValues {
 
 export const signupValidationSchema = yup.object({
   name: yup.string().min(userRules.name.min).max(userRules.name.max).required(),
+  bio: yup.string().min(userRules.bio.min).max(userRules.bio.max).optional(),
   email: yup.string().email().required(),
   password: yup
     .string()

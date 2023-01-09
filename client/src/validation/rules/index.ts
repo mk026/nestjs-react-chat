@@ -3,6 +3,10 @@ export const userRules = {
     min: 1,
     max: 100,
   },
+  bio: {
+    min: 1,
+    max: 1000,
+  },
   password: {
     min: 8,
     max: 100,
