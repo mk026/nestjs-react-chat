@@ -8,7 +8,7 @@ import {
   messageValidationSchema,
 } from "../../../validation/messageValidation";
 import { useAddMessageMutation } from "../../../store/api/messageApi";
-import FormField from "../../form-field/FormField";
+import FormField from "../../common/form-field/FormField";
 
 import classes from "./AddMessageForm.module.scss";
 
