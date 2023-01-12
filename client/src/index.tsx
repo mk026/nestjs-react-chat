@@ -6,6 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import { store } from "./store";
+import { validateConfig } from "./validation/configValidation";
+
+validateConfig();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
