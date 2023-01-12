@@ -1,8 +1,7 @@
 import { baseApi } from "./baseApi";
 import { IMessage } from "../../models/IMessage";
 import { socketService } from "../../services/socketService";
-
-export const MESSAGES_URL = "/messages";
+import { config } from "../../config";
 
 export interface AddMessageDto {
   content: string;
@@ -12,7 +11,7 @@ export interface AddMessageDto {
 export const messageApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getMessages: builder.query<IMessage[], number>({
-      query: (roomId) => ({ url: MESSAGES_URL, params: { roomId } }),
+      query: (roomId) => ({ url: config.messagesUrl, params: { roomId } }),
       async onCacheEntryAdded(
         arg,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved }

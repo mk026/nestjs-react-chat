@@ -1,35 +1,33 @@
 import { baseApi, HttpMethod } from "./baseApi";
 import { IUser } from "../../models/IUser";
 import { PasswordFormValues } from "../../validation/passwordValidation";
-
-export const USERS_URL = "/users";
-export const PASSWORD_UPDATE_URL = "/users/password";
+import { config } from "../../config";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query<IUser[], number>({
-      query: (roomId) => ({ url: USERS_URL, params: { roomId } }),
+      query: (roomId) => ({ url: config.usersUrl, params: { roomId } }),
     }),
     getUser: builder.query<IUser, number>({
-      query: (id: number) => ({ url: `${USERS_URL}/${id}` }),
+      query: (id: number) => ({ url: `${config.usersUrl}/${id}` }),
     }),
     updateUser: builder.mutation<IUser, IUser>({
       query: (body: IUser) => ({
-        url: `${USERS_URL}/${body.id}`,
+        url: `${config.usersUrl}/${body.id}`,
         method: HttpMethod.PUT,
         body,
       }),
     }),
     updatePassword: builder.mutation<void, PasswordFormValues>({
       query: (body: PasswordFormValues) => ({
-        url: PASSWORD_UPDATE_URL,
+        url: config.passwordUpdateUrl,
         method: HttpMethod.PUT,
         body,
       }),
     }),
     deleteUser: builder.mutation<void, number>({
       query: (id: number) => ({
-        url: `${USERS_URL}/${id}`,
+        url: `${config.usersUrl}/${id}`,
         method: HttpMethod.DELETE,
       }),
     }),

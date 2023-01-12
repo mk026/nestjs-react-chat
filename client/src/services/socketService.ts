@@ -1,9 +1,8 @@
 import { io, Socket } from "socket.io-client";
+import { config } from "../config";
 
 import { IMessage } from "../models/IMessage";
 import { AddMessageDto } from "../store/api/messageApi";
-
-export const SOCKET_URL = "ws://localhost:8080";
 
 export interface ServerToClientEvents {
   message: (data: IMessage) => void;
@@ -17,7 +16,7 @@ export interface ClientToServerEvents {
 
 class SocketService {
   private readonly socket: Socket<ServerToClientEvents, ClientToServerEvents> =
-    io(SOCKET_URL, {
+    io(config.socketUrl, {
       autoConnect: false,
     });
 

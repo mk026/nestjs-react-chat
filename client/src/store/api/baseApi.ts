@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { RootState } from "..";
+import { config } from "../../config";
 
 export enum HttpMethod {
   GET = "GET",
@@ -10,11 +11,9 @@ export enum HttpMethod {
   DELETE = "DELETE",
 }
 
-export const BASE_URL = "http://localhost:8080";
-
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL,
+    baseUrl: config.baseUrl,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
       if (token) {
