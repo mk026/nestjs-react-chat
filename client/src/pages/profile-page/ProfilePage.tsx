@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Typography } from "@mui/material";
 
-import UpdateProfileForm from "../../components/forms/update-profile-form/UpdateProfileForm";
+import UpdateProfileForm from "../../components/forms/update-profile-form";
 import { useAppSelector } from "../../hooks/redux";
 import { getAuthState } from "../../store/selectors/authSelectors";
 

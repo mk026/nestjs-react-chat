@@ -1,6 +1,7 @@
 import { FC } from "react";
-import SearchRoomForm from "../../components/forms/search-room-form/SearchRoomForm";
-import RoomsList from "../../components/rooms/rooms-list/RoomsList";
+
+import SearchRoomForm from "../../components/forms/search-room-form";
+import RoomsList from "../../components/rooms/rooms-list";
 import { useGetRoomsQuery } from "../../store/api/roomApi";
 
 const RoomsPage: FC = () => {

@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
 
-import SignupForm from "../../components/forms/signup-form/SignupForm";
+import SignupForm from "../../components/forms/signup-form";
 import { Paths } from "../../routes";
 
 const SignupPage: FC = () => {

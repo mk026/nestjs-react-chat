@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
 
-import SigninForm from "../../components/forms/signin-form/SigninForm";
+import SigninForm from "../../components/forms/signin-form";
 import { Paths } from "../../routes";
 
 const SigninPage: FC = () => {

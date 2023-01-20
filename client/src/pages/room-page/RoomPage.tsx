@@ -2,9 +2,9 @@ import { FC, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 
-import AddMessageForm from "../../components/forms/add-message-form/AddMessageForm";
-import MessagesList from "../../components/messages/messages-list/MessagesList";
-import RoomHeader from "../../components/rooms/room-header/RoomHeader";
+import AddMessageForm from "../../components/forms/add-message-form";
+import MessagesList from "../../components/messages/messages-list";
+import RoomHeader from "../../components/rooms/room-header";
 import { useGetRoomQuery } from "../../store/api/roomApi";
 import { useGetMessagesQuery } from "../../store/api/messageApi";
 
