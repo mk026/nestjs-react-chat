@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren } from "react";
+import { Container } from "@mui/material";
 
 import Header from "../header/Header";
 
@@ -6,7 +7,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <Header />
-      {children}
+      <Container component="main">{children}</Container>
     </>
   );
 };
