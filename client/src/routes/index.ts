@@ -1,13 +1,13 @@
 import { ComponentType } from "react";
 
-import HomePage from "../pages/home-page/HomePage";
-import ProfilePage from "../pages/profile-page/ProfilePage";
-import RoomPage from "../pages/room-page/RoomPage";
-import RoomsPage from "../pages/rooms-page/RoomsPage";
-import AddRoomPage from "../pages/add-room-page/AddRoomPage";
-import UpdateRoomPage from "../pages/update-room-page/UpdateRoomPage";
-import SigninPage from "../pages/signin-page/SigninPage";
-import SignupPage from "../pages/signup-page/SignupPage";
+import HomePage from "../pages/home-page";
+import ProfilePage from "../pages/profile-page";
+import RoomPage from "../pages/room-page";
+import RoomsPage from "../pages/rooms-page";
+import AddRoomPage from "../pages/add-room-page";
+import UpdateRoomPage from "../pages/update-room-page";
+import SigninPage from "../pages/signin-page";
+import SignupPage from "../pages/signup-page";
 
 export enum Paths {
   HOME = "/",
