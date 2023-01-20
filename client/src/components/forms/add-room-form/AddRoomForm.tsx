@@ -8,8 +8,8 @@ import {
   roomValidationSchema,
 } from "../../../validation/roomValidation";
 import { useAddRoomMutation } from "../../../store/api/roomApi";
-import FormField from "../../common/form-field/FormField";
-import LoadingButton from "../../common/loading-button/LoadingButton";
+import FormField from "../../common/form-field";
+import LoadingButton from "../../common/loading-button";
 
 const AddRoomForm: FC = () => {
   const [addRoom, { isLoading }] = useAddRoomMutation();

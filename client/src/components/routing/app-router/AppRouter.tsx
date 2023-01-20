@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { authRoutes, publicRoutes } from "../../../routes";
-import AuthWrapper from "../auth-wrapper/AuthWrapper";
+import AuthWrapper from "../auth-wrapper";
 
 const AppRouter: FC = () => {
   return (

@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Stack } from "@mui/material";
 
 import { IRoom } from "../../../models/IRoom";
-import RoomItem from "../room-item/RoomItem";
+import RoomItem from "../room-item";
 
 interface RoomsListProps {
   rooms: IRoom[];

@@ -9,8 +9,8 @@ import {
 } from "../../../validation/roomValidation";
 import { useUpdateRoomMutation } from "../../../store/api/roomApi";
 import { IRoom } from "../../../models/IRoom";
-import FormField from "../../common/form-field/FormField";
-import LoadingButton from "../../common/loading-button/LoadingButton";
+import FormField from "../../common/form-field";
+import LoadingButton from "../../common/loading-button";
 
 interface UpdateRoomFormProps {
   room: IRoom;

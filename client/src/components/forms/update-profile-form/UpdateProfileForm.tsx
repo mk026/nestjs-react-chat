@@ -9,8 +9,8 @@ import {
 } from "../../../validation/userValidation";
 import { useUpdateUserMutation } from "../../../store/api/userApi";
 import { IUser } from "../../../models/IUser";
-import FormField from "../../common/form-field/FormField";
-import LoadingButton from "../../common/loading-button/LoadingButton";
+import FormField from "../../common/form-field";
+import LoadingButton from "../../common/loading-button";
 
 interface UpdateProfileFormProps {
   user: IUser;

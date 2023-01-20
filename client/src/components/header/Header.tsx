@@ -2,8 +2,8 @@ import { FC } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Box, Button, Stack, Typography } from "@mui/material";
 
-import AuthLinks from "../auth-links/AuthLinks";
-import Navbar from "../navbar/Navbar";
+import AuthLinks from "../auth-links";
+import Navbar from "../navbar";
 import { useAppSelector } from "../../hooks/redux";
 import { getAuthState } from "../../store/selectors/authSelectors";
 import { useActions } from "../../hooks/useActions";

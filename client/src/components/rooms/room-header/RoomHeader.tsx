@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Stack, Typography } from "@mui/material";
 
-import RoomControls from "../room-controls/RoomControls";
-import RoomMembers from "../room-members/RoomMembers";
+import RoomControls from "../room-controls";
+import RoomMembers from "../room-members";
 import { IRoom } from "../../../models/IRoom";
 
 import classes from "./RoomHeader.module.scss";

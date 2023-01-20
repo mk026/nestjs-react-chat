@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Stack } from "@mui/material";
 
 import { IMessage } from "../../../models/IMessage";
-import MessageItem from "../message-item/MessageItem";
+import MessageItem from "../message-item";
 
 import classes from "./MessagesList.module.scss";
 
