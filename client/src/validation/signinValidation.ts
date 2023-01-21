@@ -1,9 +1,7 @@
 import * as yup from "yup";
 
-export interface SigninFormValues {
-  email: string;
-  password: string;
-}
+export interface SigninFormValues
+  extends yup.InferType<typeof signinValidationSchema> {}
 
 export const signinValidationSchema = yup.object({
   email: yup.string().email().required(),

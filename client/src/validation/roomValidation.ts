@@ -2,10 +2,8 @@ import * as yup from "yup";
 
 import { roomRules } from "./rules";
 
-export interface RoomFormValues {
-  title: string;
-  description: string;
-}
+export interface RoomFormValues
+  extends yup.InferType<typeof roomValidationSchema> {}
 
 export const roomValidationSchema = yup.object({
   title: yup

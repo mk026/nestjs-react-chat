@@ -2,11 +2,8 @@ import * as yup from "yup";
 
 import { userRules } from "./rules";
 
-export interface PasswordFormValues {
-  oldPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-}
+export interface PasswordFormValues
+  extends yup.InferType<typeof passwordValidationSchema> {}
 
 export const passwordValidationSchema = yup.object({
   oldPassword: yup.string().required(),

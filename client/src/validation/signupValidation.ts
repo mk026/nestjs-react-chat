@@ -2,13 +2,8 @@ import * as yup from "yup";
 
 import { userRules } from "./rules";
 
-export interface SignupFormValues {
-  name: string;
-  bio?: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+export interface SignupFormValues
+  extends yup.InferType<typeof signupValidationSchema> {}
 
 export const signupValidationSchema = yup.object({
   name: yup.string().min(userRules.name.min).max(userRules.name.max).required(),
