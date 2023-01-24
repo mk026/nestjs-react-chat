@@ -1,5 +1,8 @@
 import * as yup from "yup";
 
+export interface EnvironmentVariables
+  extends yup.InferType<typeof configValidationSchema> {}
+
 export const configValidationSchema = yup.object({
   REACT_APP_API_BASE_URL: yup.string().required(),
   REACT_APP_API_SOCKET_URL: yup.string().required(),
