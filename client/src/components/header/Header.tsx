@@ -23,7 +23,7 @@ const Header: FC = () => {
   };
 
   return (
-    <Box component="header" className={classes.header}>
+    <Box component="header" className={classes.header} data-testid="header">
       <Stack direction="row" alignItems="center">
         <Typography mr="2rem" component={NavLink} to={Paths.HOME}>
           React Chat
