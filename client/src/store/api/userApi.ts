@@ -1,6 +1,5 @@
 import { baseApi, HttpMethod } from "./baseApi";
-import { IUser } from "../../models/user";
-import { PasswordFormValues } from "../../validation/passwordValidation";
+import { IUser, UpdatePasswordDto, UpdateUserDto } from "../../models/user";
 import { config } from "../../config";
 
 export const userApi = baseApi.injectEndpoints({
@@ -11,15 +10,15 @@ export const userApi = baseApi.injectEndpoints({
     getUser: builder.query<IUser, number>({
       query: (id: number) => ({ url: `${config.usersUrl}/${id}` }),
     }),
-    updateUser: builder.mutation<IUser, IUser>({
-      query: (body: IUser) => ({
+    updateUser: builder.mutation<IUser, UpdateUserDto>({
+      query: (body: UpdateUserDto) => ({
         url: `${config.usersUrl}/${body.id}`,
         method: HttpMethod.PUT,
         body,
       }),
     }),
-    updatePassword: builder.mutation<void, PasswordFormValues>({
-      query: (body: PasswordFormValues) => ({
+    updatePassword: builder.mutation<void, UpdatePasswordDto>({
+      query: (body: UpdatePasswordDto) => ({
         url: config.passwordUpdateUrl,
         method: HttpMethod.PUT,
         body,
