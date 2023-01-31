@@ -6,3 +6,8 @@ export interface IMessage {
   roomId: number;
   content: string;
 }
+
+export interface AddMessageDto {
+  content: string;
+  roomId: number;
+}

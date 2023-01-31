@@ -1,12 +1,7 @@
 import { baseApi } from "./baseApi";
-import { IMessage } from "../../models/message";
+import { AddMessageDto, IMessage } from "../../models/message";
 import { socketService } from "../../services/socketService";
 import { config } from "../../config";
-
-export interface AddMessageDto {
-  content: string;
-  roomId: number;
-}
 
 export const messageApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

@@ -1,14 +1,9 @@
 import { baseApi, HttpMethod } from "./baseApi";
 import { SigninFormValues } from "../../validation/signinValidation";
 import { SignupFormValues } from "../../validation/signupValidation";
-import { IUser } from "../../models/user";
 import { socketService } from "../../services/socketService";
+import { AuthResponse } from "../../models/auth";
 import { config } from "../../config";
-
-export interface AuthResponse {
-  user: IUser;
-  token: string;
-}
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

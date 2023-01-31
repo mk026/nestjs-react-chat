@@ -7,3 +7,14 @@ export interface IRoom {
   description: string;
   members: IUser[];
 }
+
+export interface AddRoomDto {
+  title: string;
+  description: string;
+}
+
+export interface UpdateRoomDto {
+  id: number;
+  title?: string;
+  description?: string;
+}

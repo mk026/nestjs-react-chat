@@ -1,17 +1,6 @@
 import { baseApi, HttpMethod } from "./baseApi";
-import { IRoom } from "../../models/room";
+import { AddRoomDto, IRoom, UpdateRoomDto } from "../../models/room";
 import { config } from "../../config";
-
-export interface AddRoomDto {
-  title: string;
-  description: string;
-}
-
-export interface UpdateRoomDto {
-  id: number;
-  title?: string;
-  description?: string;
-}
 
 export const roomApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
