@@ -3,7 +3,7 @@ import { Stack, Typography } from "@mui/material";
 
 import RoomControls from "../room-controls";
 import RoomMembers from "../room-members";
-import { IRoom } from "../../../models/IRoom";
+import { IRoom } from "../../../models/room";
 
 import classes from "./RoomHeader.module.scss";
 

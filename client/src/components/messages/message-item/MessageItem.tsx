@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Avatar, Box, Card, Stack, Typography } from "@mui/material";
 
-import { IMessage } from "../../../models/IMessage";
+import { IMessage } from "../../../models/message";
 
 import classes from "./MessageItem.module.scss";
 

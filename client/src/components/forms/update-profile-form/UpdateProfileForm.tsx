@@ -8,7 +8,7 @@ import {
   userValidationSchema,
 } from "../../../validation/userValidation";
 import { useUpdateUserMutation } from "../../../store/api/userApi";
-import { IUser } from "../../../models/IUser";
+import { IUser } from "../../../models/user";
 import FormField from "../../common/form-field";
 import LoadingButton from "../../common/loading-button";
 

@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Button, Card, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import { IRoom } from "../../../models/IRoom";
+import { IRoom } from "../../../models/room";
 import { Paths } from "../../../routes";
 
 interface RoomItemProps {

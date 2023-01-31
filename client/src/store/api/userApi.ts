@@ -1,5 +1,5 @@
 import { baseApi, HttpMethod } from "./baseApi";
-import { IUser } from "../../models/IUser";
+import { IUser } from "../../models/user";
 import { PasswordFormValues } from "../../validation/passwordValidation";
 import { config } from "../../config";
 

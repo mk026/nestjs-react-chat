@@ -1,7 +1,7 @@
 import { baseApi, HttpMethod } from "./baseApi";
 import { SigninFormValues } from "../../validation/signinValidation";
 import { SignupFormValues } from "../../validation/signupValidation";
-import { IUser } from "../../models/IUser";
+import { IUser } from "../../models/user";
 import { socketService } from "../../services/socketService";
 import { config } from "../../config";
 

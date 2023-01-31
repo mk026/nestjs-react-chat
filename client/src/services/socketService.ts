@@ -1,7 +1,7 @@
 import { io, Socket } from "socket.io-client";
 import { config } from "../config";
 
-import { IMessage } from "../models/IMessage";
+import { IMessage } from "../models/message";
 import { AddMessageDto } from "../store/api/messageApi";
 
 export interface ServerToClientEvents {

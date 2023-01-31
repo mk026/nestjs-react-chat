@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Paper, Typography } from "@mui/material";
 
-import { IUser } from "../../models/IUser";
+import { IUser } from "../../models/user";
 
 interface UserInfoProps {
   user: IUser;

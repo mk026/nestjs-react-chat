@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { AvatarGroup } from "@mui/material";
 
-import { IUser } from "../../../models/IUser";
+import { IUser } from "../../../models/user";
 
 interface RoomMembersProps {
   members: IUser[];

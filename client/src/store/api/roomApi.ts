@@ -1,5 +1,5 @@
 import { baseApi, HttpMethod } from "./baseApi";
-import { IRoom } from "../../models/IRoom";
+import { IRoom } from "../../models/room";
 import { config } from "../../config";
 
 export interface AddRoomDto {

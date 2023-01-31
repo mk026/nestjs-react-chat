@@ -1,5 +1,5 @@
 import { baseApi } from "./baseApi";
-import { IMessage } from "../../models/IMessage";
+import { IMessage } from "../../models/message";
 import { socketService } from "../../services/socketService";
 import { config } from "../../config";
 

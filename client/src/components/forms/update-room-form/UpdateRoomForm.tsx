@@ -8,7 +8,7 @@ import {
   roomValidationSchema,
 } from "../../../validation/roomValidation";
 import { useUpdateRoomMutation } from "../../../store/api/roomApi";
-import { IRoom } from "../../../models/IRoom";
+import { IRoom } from "../../../models/room";
 import FormField from "../../common/form-field";
 import LoadingButton from "../../common/loading-button";
 
