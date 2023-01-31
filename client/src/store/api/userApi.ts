@@ -12,7 +12,7 @@ export const userApi = baseApi.injectEndpoints({
     }),
     updateUser: builder.mutation<IUser, UpdateUserDto>({
       query: (body: UpdateUserDto) => ({
-        url: `${config.usersUrl}/${body.id}`,
+        url: config.usersUrl,
         method: HttpMethod.PUT,
         body,
       }),

@@ -7,7 +7,6 @@ export interface IUser {
 }
 
 export interface UpdateUserDto {
-  id: number;
   name?: string;
   bio?: string;
   email?: string;
