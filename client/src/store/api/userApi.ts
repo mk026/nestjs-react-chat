@@ -8,24 +8,24 @@ export const userApi = baseApi.injectEndpoints({
       query: (roomId) => ({ url: config.usersUrl, params: { roomId } }),
     }),
     getUser: builder.query<IUser, number>({
-      query: (id: number) => ({ url: `${config.usersUrl}/${id}` }),
+      query: (id) => ({ url: `${config.usersUrl}/${id}` }),
     }),
     updateUser: builder.mutation<IUser, UpdateUserDto>({
-      query: (body: UpdateUserDto) => ({
+      query: (body) => ({
         url: config.usersUrl,
         method: HttpMethod.PUT,
         body,
       }),
     }),
     updatePassword: builder.mutation<void, UpdatePasswordDto>({
-      query: (body: UpdatePasswordDto) => ({
+      query: (body) => ({
         url: config.passwordUpdateUrl,
         method: HttpMethod.PUT,
         body,
       }),
     }),
     deleteUser: builder.mutation<void, number>({
-      query: (id: number) => ({
+      query: (id) => ({
         url: `${config.usersUrl}/${id}`,
         method: HttpMethod.DELETE,
       }),
