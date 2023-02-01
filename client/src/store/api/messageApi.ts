@@ -37,6 +37,17 @@ export const messageApi = baseApi.injectEndpoints({
         return { data: null };
       },
     }),
+    getTypingNotifications: builder.query<string[], void>({
+      queryFn: () => ({ data: [] }),
+      async onQueryStarted(arg, { queryFulfilled, updateCachedData }) {
+        await queryFulfilled;
+        socketService.subscribeToTypingNotifications((notification) => {
+          updateCachedData((draft) => {
+            draft.push(notification);
+          });
+        });
+      },
+    }),
   }),
 });
 
