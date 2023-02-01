@@ -31,6 +31,12 @@ export const messageApi = baseApi.injectEndpoints({
         return { data: null };
       },
     }),
+    notifyTyping: builder.mutation<null, number>({
+      queryFn: (roomId) => {
+        socketService.notifyTyping(roomId);
+        return { data: null };
+      },
+    }),
   }),
 });
 

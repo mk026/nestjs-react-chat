@@ -23,6 +23,10 @@ class SocketService {
     this.socket.emit("message", data);
   }
 
+  notifyTyping(roomId: number) {
+    this.socket.emit("isTyping", roomId);
+  }
+
   subscribeToMessages(messageHandler: ServerToClientEvents["message"]) {
     this.socket.on("message", messageHandler);
   }
