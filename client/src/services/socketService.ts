@@ -1,17 +1,8 @@
 import { io, Socket } from "socket.io-client";
 import { config } from "../config";
+import { ClientToServerEvents, ServerToClientEvents } from "../models/event";
 
-import { AddMessageDto, IMessage } from "../models/message";
-
-export interface ServerToClientEvents {
-  message: (data: IMessage) => void;
-}
-
-export interface ClientToServerEvents {
-  message: (data: AddMessageDto) => void;
-  join: (roomId: number) => void;
-  leave: (roomId: number) => void;
-}
+import { AddMessageDto } from "../models/message";
 
 class SocketService {
   private readonly socket: Socket<ServerToClientEvents, ClientToServerEvents> =
