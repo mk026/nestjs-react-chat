@@ -31,6 +31,12 @@ class SocketService {
     this.socket.on("message", messageHandler);
   }
 
+  subscribeToTypingNotifications(
+    typingNotificationsHandler: ServerToClientEvents["isTyping"]
+  ) {
+    this.socket.on("isTyping", typingNotificationsHandler);
+  }
+
   joinRoom(roomId: number) {
     this.socket.emit("join", roomId);
   }
