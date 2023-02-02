@@ -51,4 +51,9 @@ export const messageApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetMessagesQuery, useAddMessageMutation } = messageApi;
+export const {
+  useGetMessagesQuery,
+  useAddMessageMutation,
+  useGetTypingNotificationsQuery,
+  useNotifyTypingMutation,
+} = messageApi;
