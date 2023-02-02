@@ -52,6 +52,14 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     client.to(message.room.toString()).emit('message', message);
   }
 
+  @SubscribeMessage('isTyping')
+  async handleTypingNotification(client: Socket, roomId: CreateMessageDto) {
+    console.log(`Client ${client.id} typing message to room: ${roomId}`);
+    client
+      .to(roomId.toString())
+      .emit('isTyping', `${client.id} typing message...`);
+  }
+
   handleDisconnect(client: Socket) {
     console.log(`Client ${client.id} disconnected`);
   }
