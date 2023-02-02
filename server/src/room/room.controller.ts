@@ -32,6 +32,11 @@ export class RoomController {
     return this.roomService.getRoom(id);
   }
 
+  @Get('search')
+  searchRooms() {
+    return this.roomService.searchRooms();
+  }
+
   @Post()
   createRoom(@AuthUser() userId: number, @Body() createRoomDto: CreateRoomDto) {
     return this.roomService.createRoom(createRoomDto, userId);

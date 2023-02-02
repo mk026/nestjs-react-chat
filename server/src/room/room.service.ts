@@ -26,6 +26,10 @@ export class RoomService {
     return this.roomRepository.findOneBy({ id });
   }
 
+  searchRooms() {
+    return this.roomRepository.find();
+  }
+
   async createRoom(createRoomDto: CreateRoomDto, userId: number) {
     const room = this.roomRepository.create({
       title: createRoomDto.title,
