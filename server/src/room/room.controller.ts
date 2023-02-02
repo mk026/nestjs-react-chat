@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 
@@ -16,6 +17,7 @@ import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 import { RoomService } from './room.service';
 import { GetRoomsDto } from './dto/get-rooms.dto';
+import { SearchRoomsDto } from './dto/search-rooms.dto';
 
 @Controller('rooms')
 @UseGuards(JwtAuthGuard)
@@ -33,8 +35,8 @@ export class RoomController {
   }
 
   @Get('search')
-  searchRooms() {
-    return this.roomService.searchRooms();
+  searchRooms(@Query() searchRoomsDto: SearchRoomsDto) {
+    return this.roomService.searchRooms(searchRoomsDto);
   }
 
   @Post()

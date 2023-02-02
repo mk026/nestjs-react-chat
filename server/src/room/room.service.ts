@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 
 import { CreateRoomDto } from './dto/create-room.dto';
 import { GetRoomsDto } from './dto/get-rooms.dto';
+import { SearchRoomsDto } from './dto/search-rooms.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 import { Room } from './room.entity';
 
@@ -26,8 +27,21 @@ export class RoomService {
     return this.roomRepository.findOneBy({ id });
   }
 
-  searchRooms() {
-    return this.roomRepository.find();
+  async searchRooms(searchRoomsDto: SearchRoomsDto) {
+    const qb = this.roomRepository.createQueryBuilder('rooms');
+    if (searchRoomsDto.skip) {
+      qb.skip(searchRoomsDto.skip);
+    }
+    if (searchRoomsDto.take) {
+      qb.take(searchRoomsDto.take);
+    }
+    if (searchRoomsDto.title) {
+      qb.andWhere('rooms.title ILIKE :title', {
+        title: `%${searchRoomsDto.title}%`,
+      });
+    }
+    const [items, count] = await qb.getManyAndCount();
+    return { items, count };
   }
 
   async createRoom(createRoomDto: CreateRoomDto, userId: number) {
