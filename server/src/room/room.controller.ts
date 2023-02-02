@@ -15,6 +15,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 import { RoomService } from './room.service';
+import { GetRoomsDto } from './dto/get-rooms.dto';
 
 @Controller('rooms')
 @UseGuards(JwtAuthGuard)
@@ -22,8 +23,8 @@ export class RoomController {
   constructor(private readonly roomService: RoomService) {}
 
   @Get()
-  getRooms() {
-    return this.roomService.getRooms();
+  getRooms(getRoomsDto: GetRoomsDto) {
+    return this.roomService.getRooms(getRoomsDto);
   }
 
   @Get(':id')

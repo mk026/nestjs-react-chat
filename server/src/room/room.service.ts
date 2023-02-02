@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { CreateRoomDto } from './dto/create-room.dto';
+import { GetRoomsDto } from './dto/get-rooms.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 import { Room } from './room.entity';
 
@@ -13,8 +14,12 @@ export class RoomService {
     private readonly roomRepository: Repository<Room>,
   ) {}
 
-  getRooms() {
-    return this.roomRepository.find();
+  getRooms(getRoomsDto: GetRoomsDto) {
+    return this.roomRepository.find({
+      skip: getRoomsDto.skip,
+      take: getRoomsDto.take,
+      order: { createdAt: 'DESC' },
+    });
   }
 
   getRoom(id: number) {
