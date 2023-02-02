@@ -40,6 +40,11 @@ export class RoomService {
         title: `%${searchRoomsDto.title}%`,
       });
     }
+    if (searchRoomsDto.ownerId) {
+      qb.andWhere('rooms.ownerId = :ownerId', {
+        ownerId: searchRoomsDto.ownerId,
+      });
+    }
     const [items, count] = await qb.getManyAndCount();
     return { items, count };
   }
