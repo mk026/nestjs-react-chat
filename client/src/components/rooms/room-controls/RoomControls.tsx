@@ -1,7 +1,13 @@
+import { Button, Stack } from "@mui/material";
 import { FC } from "react";
 
 const RoomControls: FC = () => {
-  return <div>RoomControls</div>;
+  return (
+    <Stack direction="row">
+      <Button>Leave</Button>
+      <Button>Edit</Button>
+    </Stack>
+  );
 };
 
 export default RoomControls;
