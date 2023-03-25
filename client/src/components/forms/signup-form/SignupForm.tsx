@@ -1,52 +1,26 @@
-import { FC, useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Box } from "@mui/material";
+import { FC } from "react";
 
-import {
-  SignupFormValues,
-  signupValidationSchema,
-} from "../../../validation/signupValidation";
-import { useSignupMutation } from "../../../store/api/authApi";
-import { Paths } from "../../../routes";
 import FormField from "../../common/form-field";
 import LoadingButton from "../../common/loading-button";
+import Form from "../../common/form";
+import { useSignupForm } from "../../../hooks/useSignupForm";
 
 const SignupForm: FC = () => {
-  const [signup, { isLoading, isSuccess }] = useSignupMutation();
-  const methods = useForm<SignupFormValues>({
-    mode: "onBlur",
-    resolver: yupResolver(signupValidationSchema),
-  });
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isSuccess) {
-      methods.reset();
-      navigate(Paths.ROOMS);
-    }
-  }, [isSuccess, navigate, methods]);
-
-  const signupHandler = (values: SignupFormValues) => {
-    signup(values);
-  };
+  const { formMethods, onSubmit, isLoading } = useSignupForm();
 
   return (
-    <FormProvider {...methods}>
-      <Box component="form" onSubmit={methods.handleSubmit(signupHandler)}>
-        <FormField label="Name" name="name" />
-        <FormField label="About yourself" name="bio" multiline />
-        <FormField label="Email" name="email" type="email" />
-        <FormField label="Password" name="password" type="password" />
-        <FormField
-          label="Confirm Password"
-          name="confirmPassword"
-          type="password"
-        />
-        <LoadingButton isLoading={isLoading}>Submit</LoadingButton>
-      </Box>
-    </FormProvider>
+    <Form formMethods={formMethods} onSubmit={onSubmit}>
+      <FormField label="Name" name="name" />
+      <FormField label="About yourself" name="bio" multiline />
+      <FormField label="Email" name="email" type="email" />
+      <FormField label="Password" name="password" type="password" />
+      <FormField
+        label="Confirm Password"
+        name="confirmPassword"
+        type="password"
+      />
+      <LoadingButton isLoading={isLoading}>Submit</LoadingButton>
+    </Form>
   );
 };
 
