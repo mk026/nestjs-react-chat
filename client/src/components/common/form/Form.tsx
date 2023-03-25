@@ -1,14 +1,18 @@
-import { FC } from "react";
-import { FormProvider, UseFormReturn } from "react-hook-form";
+import { FieldValues, FormProvider, UseFormReturn } from "react-hook-form";
 import { Box, BoxProps } from "@mui/material";
 
-interface FormProps extends BoxProps {
-  formMethods: UseFormReturn;
+interface FormProps<T extends FieldValues> extends BoxProps {
+  formMethods: UseFormReturn<T>;
   onSubmit: BoxProps["onSubmit"];
   children: BoxProps["children"];
 }
 
-const Form: FC<FormProps> = ({ formMethods, onSubmit, children, ...props }) => {
+const Form = <T extends FieldValues>({
+  formMethods,
+  onSubmit,
+  children,
+  ...props
+}: FormProps<T>) => {
   return (
     <FormProvider {...formMethods}>
       <Box component="form" onSubmit={onSubmit} {...props}>
