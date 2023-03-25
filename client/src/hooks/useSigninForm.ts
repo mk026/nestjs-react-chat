@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -25,16 +25,9 @@ export const useSigninForm = () => {
     }
   }, [isSuccess, navigate, formMethods]);
 
-  const signinHandler = useCallback(
-    (values: SigninFormValues) => {
-      signin(values);
-    },
-    [signin]
-  );
-
   return {
     formMethods,
-    onSubmit: formMethods.handleSubmit(signinHandler),
+    onSubmit: formMethods.handleSubmit(signin),
     isLoading,
   };
 };
