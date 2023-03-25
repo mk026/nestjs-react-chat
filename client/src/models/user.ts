@@ -14,6 +14,6 @@ export interface UpdateUserDto {
 
 export interface UpdatePasswordDto {
   oldPassword: string;
-  password: string;
+  newPassword: string;
   confirmPassword: string;
 }
