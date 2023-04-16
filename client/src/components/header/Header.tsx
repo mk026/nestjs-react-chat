@@ -1,26 +1,18 @@
 import { FC } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import { Box, Stack, Typography } from "@mui/material";
 
 import AuthLinks from "../auth-links";
 import Navbar from "../navbar";
 import { useAppSelector } from "../../hooks/redux";
 import { getAuthState } from "../../store/selectors/authSelectors";
-import { useActions } from "../../hooks/useActions";
-import { authActions } from "../../store/slices/authSlice";
 import { Paths } from "../../routes";
+import SignoutButton from "../signout-button/SignoutButton";
 
 import classes from "./Header.module.scss";
 
 const Header: FC = () => {
   const { isAuth } = useAppSelector(getAuthState);
-  const { signout } = useActions(authActions);
-  const navigate = useNavigate();
-
-  const signoutHandler = () => {
-    signout();
-    navigate(Paths.HOME);
-  };
 
   return (
     <Box component="header" className={classes.header} data-testid="header">
@@ -30,7 +22,7 @@ const Header: FC = () => {
         </Typography>
         {isAuth && <Navbar />}
         {!isAuth && <AuthLinks />}
-        {isAuth && <Button onClick={signoutHandler}>Logout</Button>}
+        {isAuth && <SignoutButton />}
       </Stack>
     </Box>
   );
