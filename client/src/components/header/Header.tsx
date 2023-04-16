@@ -1,13 +1,12 @@
 import { FC } from "react";
-import { NavLink } from "react-router-dom";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
-import AuthLinks from "../auth-links";
-import Navbar from "../navbar";
 import { useAppSelector } from "../../hooks/redux";
 import { getAuthState } from "../../store/selectors/authSelectors";
-import { Paths } from "../../routes";
-import SignoutButton from "../signout-button/SignoutButton";
+import AuthLinks from "../auth-links";
+import Navbar from "../navbar";
+import AppTitle from "../app-title";
+import SignoutButton from "../signout-button";
 
 import classes from "./Header.module.scss";
 
@@ -17,12 +16,9 @@ const Header: FC = () => {
   return (
     <Box component="header" className={classes.header} data-testid="header">
       <Stack direction="row" alignItems="center">
-        <Typography mr="2rem" component={NavLink} to={Paths.HOME}>
-          React Chat
-        </Typography>
+        <AppTitle />
         {isAuth && <Navbar />}
-        {!isAuth && <AuthLinks />}
-        {isAuth && <SignoutButton />}
+        {isAuth ? <SignoutButton /> : <AuthLinks />}
       </Stack>
     </Box>
   );
