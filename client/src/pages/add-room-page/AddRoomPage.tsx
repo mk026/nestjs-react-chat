@@ -1,12 +1,13 @@
 import { FC } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import AddRoomForm from "../../components/forms/add-room-form";
+import PageTitle from "../../components/page-title";
 
 const AddRoomPage: FC = () => {
   return (
     <Box>
-      <Typography>Add new room</Typography>
+      <PageTitle>Add new room</PageTitle>
       <AddRoomForm />
     </Box>
   );

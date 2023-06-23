@@ -1,10 +1,11 @@
 import { FC } from "react";
-import { Typography } from "@mui/material";
+
+import PageTitle from "../../components/page-title";
 
 const HomePage: FC = () => {
   return (
     <>
-      <Typography>HomePage</Typography>
+      <PageTitle>HomePage</PageTitle>
     </>
   );
 };

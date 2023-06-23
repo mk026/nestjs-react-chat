@@ -1,9 +1,10 @@
 import { FC, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useGetRoomQuery } from "../../store/api/roomApi";
+import PageTitle from "../../components/page-title";
 import UpdateRoomForm from "../../components/forms/update-room-form";
+import { useGetRoomQuery } from "../../store/api/roomApi";
 import { useAppSelector } from "../../hooks/redux";
 import { getAuthState } from "../../store/selectors/authSelectors";
 import { Paths } from "../../routes";
@@ -23,7 +24,7 @@ const UpdateRoomPage: FC = () => {
 
   return (
     <Box>
-      <Typography>Update room</Typography>
+      <PageTitle>Update room</PageTitle>
       {room && <UpdateRoomForm room={room} />}
     </Box>
   );

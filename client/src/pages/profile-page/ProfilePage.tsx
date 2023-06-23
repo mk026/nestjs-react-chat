@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Typography } from "@mui/material";
 
+import PageTitle from "../../components/page-title";
 import UpdateProfileForm from "../../components/forms/update-profile-form";
 import { useAppSelector } from "../../hooks/redux";
 import { getAuthState } from "../../store/selectors/authSelectors";
@@ -10,7 +10,7 @@ const ProfilePage: FC = () => {
 
   return (
     <>
-      <Typography>ProfilePage</Typography>
+      <PageTitle>ProfilePage</PageTitle>
       <UpdateProfileForm user={user!} />
     </>
   );

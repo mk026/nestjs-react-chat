@@ -1,13 +1,13 @@
 import { FC } from "react";
-import { Typography } from "@mui/material";
 
 import SignupForm from "../../components/forms/signup-form";
 import SigninLink from "../../components/signin-link";
+import PageTitle from "../../components/page-title";
 
 const SignupPage: FC = () => {
   return (
     <>
-      <Typography variant="h1">SignupPage</Typography>
+      <PageTitle>Signup</PageTitle>
       <SignupForm />
       <SigninLink />
     </>
