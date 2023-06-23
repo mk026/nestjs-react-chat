@@ -4,7 +4,6 @@ import { Box, BoxProps } from "@mui/material";
 interface FormProps<T extends FieldValues> extends BoxProps {
   formMethods: UseFormReturn<T>;
   onSubmit: BoxProps["onSubmit"];
-  children: BoxProps["children"];
 }
 
 const Form = <T extends FieldValues>({
