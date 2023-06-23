@@ -4,9 +4,11 @@ import { Typography } from "@mui/material";
 
 import { Paths } from "../../routes";
 
+import classes from "./AppTitle.module.scss";
+
 const AppTitle: FC = () => {
   return (
-    <Typography mr="2rem" component={NavLink} to={Paths.HOME}>
+    <Typography className={classes.title} component={NavLink} to={Paths.HOME}>
       React Chat
     </Typography>
   );
