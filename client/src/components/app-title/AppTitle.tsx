@@ -8,7 +8,12 @@ import classes from "./AppTitle.module.scss";
 
 const AppTitle: FC = () => {
   return (
-    <Typography className={classes.title} component={NavLink} to={Paths.HOME}>
+    <Typography
+      variant="h1"
+      className={classes.title}
+      component={NavLink}
+      to={Paths.HOME}
+    >
       React Chat
     </Typography>
   );
