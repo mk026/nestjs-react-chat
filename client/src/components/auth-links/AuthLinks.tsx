@@ -8,12 +8,12 @@ import classes from "./AuthLinks.module.scss";
 
 const AuthLinks: FC = () => {
   return (
-    <Stack direction="row" sx={{ marginLeft: "auto" }}>
+    <Stack direction="row" className={classes.wrapper}>
       <Button
         component={NavLink}
         to={Paths.SIGNUP}
         variant="outlined"
-        classes={{ root: classes["signup-btn"] }}
+        className={classes["signup-btn"]}
       >
         Create Account
       </Button>
