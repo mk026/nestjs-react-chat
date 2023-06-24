@@ -19,7 +19,7 @@ const Header: FC = () => {
 
   return (
     <Box component="header" className={classes.header} data-testid="header">
-      <Stack direction="row" alignItems="center">
+      <Stack direction="row" className={classes.container}>
         <AppTitle />
         {isAuth && <Navbar />}
         {isAuth ? (
