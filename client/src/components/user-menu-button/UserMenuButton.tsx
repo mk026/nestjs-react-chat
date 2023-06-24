@@ -1,8 +1,13 @@
 import { FC } from "react";
 import { Button } from "@mui/material";
 
-const UserMenuButton: FC = () => {
-  return <Button>User Name</Button>;
+interface UserMenuButtonProps {
+  onClick: () => void;
+  name: string;
+}
+
+const UserMenuButton: FC<UserMenuButtonProps> = ({ onClick, name }) => {
+  return <Button onClick={onClick}>{name}</Button>;
 };
 
 export default UserMenuButton;
