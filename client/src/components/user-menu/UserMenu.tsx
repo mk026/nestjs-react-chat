@@ -6,11 +6,13 @@ import { Paths } from "../../routes";
 import { useActions } from "../../hooks/useActions";
 import { authActions } from "../../store/slices/authSlice";
 
+import classes from "./UserMenu.module.scss";
+
 const UserMenu: FC = () => {
   const { signout } = useActions(authActions);
 
   return (
-    <Stack>
+    <Stack className={classes.menu}>
       <Link to={Paths.PROFILE}>My Profile</Link>
       <Link to={Paths.ROOMS}>My Rooms</Link>
       <Button onClick={signout}>Signout</Button>
