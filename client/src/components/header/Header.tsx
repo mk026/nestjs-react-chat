@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Box, Stack } from "@mui/material";
+import { AppBar, Stack } from "@mui/material";
 
 import { useAppSelector } from "../../hooks/redux";
 import { getAuthState } from "../../store/selectors/authSelectors";
@@ -18,7 +18,7 @@ const Header: FC = () => {
   const toggleUserMenu = () => setMenuIsOpen((prev) => !prev);
 
   return (
-    <Box component="header" className={classes.header} data-testid="header">
+    <AppBar className={classes.header} data-testid="header">
       <Stack direction="row" className={classes.container}>
         <AppTitle />
         {isAuth && <Navbar />}
@@ -29,7 +29,7 @@ const Header: FC = () => {
         )}
       </Stack>
       {menuIsOpen && <UserMenu />}
-    </Box>
+    </AppBar>
   );
 };
 
