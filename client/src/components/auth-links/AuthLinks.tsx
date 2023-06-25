@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Stack } from "@mui/material";
 
 import { Paths } from "../../routes";
@@ -10,14 +10,14 @@ const AuthLinks: FC = () => {
   return (
     <Stack direction="row" className={classes.wrapper}>
       <Button
-        component={NavLink}
+        component={Link}
         to={Paths.SIGNUP}
         variant="outlined"
         className={classes["signup-btn"]}
       >
         Create Account
       </Button>
-      <Button component={NavLink} to={Paths.SIGNIN} variant="contained">
+      <Button component={Link} to={Paths.SIGNIN} variant="contained">
         Signin
       </Button>
     </Stack>
