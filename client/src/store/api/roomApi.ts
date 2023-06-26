@@ -1,5 +1,10 @@
 import { baseApi, HttpMethod } from "./baseApi";
-import { AddRoomDto, IRoom, UpdateRoomDto } from "../../models/room";
+import {
+  AddRoomDto,
+  IRoom,
+  SearchRoomsDto,
+  UpdateRoomDto,
+} from "../../models/room";
 import { config } from "../../config";
 
 export const roomApi = baseApi.injectEndpoints({
@@ -10,8 +15,12 @@ export const roomApi = baseApi.injectEndpoints({
     getRoom: builder.query<IRoom, number>({
       query: (id) => ({ url: `${config.roomsUrl}/${id}` }),
     }),
-    searchRooms: builder.query<IRoom[], void>({
-      query: () => ({ url: config.searchRoomsUrl }),
+    searchRooms: builder.query<IRoom[], SearchRoomsDto>({
+      query: (params) => ({
+        url: config.searchRoomsUrl,
+        method: HttpMethod.GET,
+        params,
+      }),
     }),
     addRoom: builder.mutation<IRoom, AddRoomDto>({
       query: (body) => ({
