@@ -10,6 +10,9 @@ export const roomApi = baseApi.injectEndpoints({
     getRoom: builder.query<IRoom, number>({
       query: (id) => ({ url: `${config.roomsUrl}/${id}` }),
     }),
+    searchRooms: builder.query<IRoom[], void>({
+      query: () => ({ url: config.searchRoomsUrl }),
+    }),
     addRoom: builder.mutation<IRoom, AddRoomDto>({
       query: (body) => ({
         url: config.roomsUrl,
