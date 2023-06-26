@@ -13,6 +13,7 @@ export const configValidationSchema = yup.object({
   REACT_APP_API_PASSWORD_UPDATE_URL: yup.string().required(),
   REACT_APP_API_MESSAGES_URL: yup.string().required(),
   REACT_APP_API_ROOMS_URL: yup.string().required(),
+  REACT_APP_API_SEARCH_ROOMS_URL: yup.string().required(),
 });
 
 export const validateConfig = () =>

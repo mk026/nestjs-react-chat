@@ -8,4 +8,5 @@ export const config = {
   passwordUpdateUrl: process.env.REACT_APP_API_PASSWORD_UPDATE_URL,
   messagesUrl: process.env.REACT_APP_API_MESSAGES_URL,
   roomsUrl: process.env.REACT_APP_API_ROOMS_URL,
+  searchRoomsUrl: process.env.REACT_APP_API_SEARCH_ROOMS_URL,
 };
