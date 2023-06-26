@@ -20,6 +20,6 @@ export interface UpdateRoomDto {
 }
 
 export interface SearchRoomsDto {
-  title: string;
-  ownerId: number;
+  title?: string;
+  ownerId?: number;
 }
