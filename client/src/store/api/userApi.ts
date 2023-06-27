@@ -1,5 +1,10 @@
 import { baseApi, HttpMethod } from "./baseApi";
-import { IUser, UpdatePasswordDto, UpdateUserDto } from "../../models/user";
+import {
+  IUser,
+  SearchUsersDto,
+  UpdatePasswordDto,
+  UpdateUserDto,
+} from "../../models/user";
 import { config } from "../../config";
 
 export const userApi = baseApi.injectEndpoints({
@@ -10,8 +15,12 @@ export const userApi = baseApi.injectEndpoints({
     getUser: builder.query<IUser, number>({
       query: (id) => ({ url: `${config.usersUrl}/${id}` }),
     }),
-    searchUsers: builder.query<IUser[], void>({
-      query: () => ({ url: config.searchUsersUrl }),
+    searchUsers: builder.query<IUser[], SearchUsersDto>({
+      query: (params) => ({
+        url: config.searchUsersUrl,
+        method: HttpMethod.GET,
+        params,
+      }),
     }),
     updateUser: builder.mutation<IUser, UpdateUserDto>({
       query: (body) => ({
