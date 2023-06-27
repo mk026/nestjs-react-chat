@@ -10,6 +10,9 @@ export const userApi = baseApi.injectEndpoints({
     getUser: builder.query<IUser, number>({
       query: (id) => ({ url: `${config.usersUrl}/${id}` }),
     }),
+    searchUsers: builder.query<IUser[], void>({
+      query: () => ({ url: config.searchUsersUrl }),
+    }),
     updateUser: builder.mutation<IUser, UpdateUserDto>({
       query: (body) => ({
         url: config.usersUrl,
