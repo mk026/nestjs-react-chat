@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import SigninForm from "../../components/forms/signin-form";
 import SignupLink from "../../components/signup-link";
-import PageTitle from "../../components/page-title";
+import PageTitle from "../../components/common/page-title";
 
 const SigninPage: FC = () => {
   return (

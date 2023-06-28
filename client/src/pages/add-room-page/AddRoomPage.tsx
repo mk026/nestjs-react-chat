@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Box } from "@mui/material";
 
 import AddRoomForm from "../../components/forms/add-room-form";
-import PageTitle from "../../components/page-title";
+import PageTitle from "../../components/common/page-title";
 
 const AddRoomPage: FC = () => {
   return (

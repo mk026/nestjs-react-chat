@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { Box } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
-import PageTitle from "../../components/page-title";
+import PageTitle from "../../components/common/page-title";
 import UpdateRoomForm from "../../components/forms/update-room-form";
 import { useGetRoomQuery } from "../../store/api/roomApi";
 import { useAppSelector } from "../../hooks/redux";
