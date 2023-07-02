@@ -30,6 +30,11 @@ export class UserController {
     return this.userService.getUser(id);
   }
 
+  @Get('search')
+  searchUsers() {
+    return this.userService.searchUsers();
+  }
+
   @Put()
   updateUser(@AuthUser() userId: number, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.updateUser(userId, updateUserDto);
