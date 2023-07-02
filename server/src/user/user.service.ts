@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { SignupCredentialsDto } from '../auth/dto/signup-credentials.dto';
+import { SearchUsersDto } from './dto/search-users.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
@@ -28,8 +29,12 @@ export class UserService {
     return this.userRepository.findOneBy({ id });
   }
 
-  searchUsers() {
-    return 'Search users';
+  searchUsers(searchUsersDto: SearchUsersDto) {
+    return this.userRepository.find({
+      where: { name: searchUsersDto.name },
+      skip: searchUsersDto.skip,
+      take: searchUsersDto.take,
+    });
   }
 
   getUserByEmail(email: string) {

@@ -6,11 +6,13 @@ import {
   Param,
   ParseIntPipe,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AuthUser } from '../common/decorators/auth-user.decorator';
+import { SearchUsersDto } from './dto/search-users.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
@@ -31,8 +33,8 @@ export class UserController {
   }
 
   @Get('search')
-  searchUsers() {
-    return this.userService.searchUsers();
+  searchUsers(@Query() searchUsersDto: SearchUsersDto) {
+    return this.userService.searchUsers(searchUsersDto);
   }
 
   @Put()
